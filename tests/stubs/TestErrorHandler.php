@@ -1,6 +1,9 @@
 <?php
 
 
+	declare( strict_types = 1 );
+
+
 	namespace Tests\stubs;
 
 	use WPEmerge\Contracts\ErrorHandlerInterface;
@@ -36,6 +39,14 @@
 
 			return new TestResponse($request);
 
+		}
+
+		public function writeToOutput( bool $false = false ) : void {
+			//
+		}
+
+		public function allowQuit( bool $false = false ) : void {
+			//
 		}
 
 	}

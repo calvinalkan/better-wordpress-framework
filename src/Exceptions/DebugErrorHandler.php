@@ -1,6 +1,9 @@
 <?php
 
 
+	declare( strict_types = 1 );
+
+
 	namespace WPEmerge\Exceptions;
 
 	use Throwable;
@@ -19,14 +22,12 @@
 		/** @var bool */
 		private $is_ajax;
 
-
 		public function __construct( RunInterface $whoops, $is_ajax = false ) {
 
 			$this->whoops = $whoops;
 
 			$this->is_ajax = $is_ajax;
 		}
-
 
 		public function register() {
 
@@ -50,6 +51,18 @@
 
 			return (new Response($output, 500))->setType($content_type);
 
+
+		}
+
+		public function writeToOutput( bool $false = false ) : void {
+
+			$this->whoops->writeToOutput($false);
+
+		}
+
+		public function allowQuit( bool $false = false ) : void {
+
+			$this->whoops->allowQuit($false);
 
 		}
 

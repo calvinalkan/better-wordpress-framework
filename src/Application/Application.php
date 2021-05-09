@@ -1,12 +1,18 @@
 <?php
 
 
+	declare( strict_types = 1 );
+
+
 	namespace WPEmerge\Application;
 
 	use Contracts\ContainerAdapter;
 	use Illuminate\Config\Repository;
 	use SniccoAdapter\BaseContainerAdapter;
+	use WPEmerge\Contracts\RequestInterface;
 	use WPEmerge\Exceptions\ConfigurationException;
+	use WPEmerge\Factories\ExceptionHandlerFactory;
+	use WPEmerge\Http\Request;
 	use WPEmerge\Support\VariableBag;
 
 	class Application {
@@ -28,12 +34,45 @@
 		public function __construct( ContainerAdapter $container) {
 
 			$this->setContainerAdapter( $container );
-			$this->container()[ WPEMERGE_APPLICATION_KEY ]   = $this;
-			$this->container()[ WPEMERGE_CONTAINER_ADAPTER ] = $this->container();
+			$this->container()[ Application::class ]   = $this;
+			$this->container()[ ContainerAdapter::class ] = $this->container();
 
 
 		}
 
+		public function captureRequest ( RequestInterface $request = null ) : Application {
+
+			$this->container()->instance(
+				RequestInterface::class,
+				$request ??  Request::capture()
+			);
+
+
+			return $this;
+
+
+		}
+
+		public function handleErrors ( string $editor = 'phpstorm' ) : Application {
+
+			$request = $this->container()->make(RequestInterface::class);
+
+			$error_handler = ( new ExceptionHandlerFactory(
+				WP_DEBUG,
+				$request->isAjax(),
+				$editor)
+			)->create();
+
+			$this->container()->instance(ExceptionHandlerFactory::class, $error_handler);
+
+			$error_handler->register();
+
+			$error_handler->allowQuit(true);
+			$error_handler->writeToOutput(true);
+
+			return $this;
+
+		}
 
 		/**
 		 * Make and assign a new application instance.
@@ -56,7 +95,8 @@
 		 *
 		 * @throws \WPEmerge\Exceptions\ConfigurationException
 		 */
-		public function bootstrap( array $config = [] ) :void {
+		public function boot( array $config = [] ) :void {
+
 
 
 			if ( $this->bootstrapped ) {

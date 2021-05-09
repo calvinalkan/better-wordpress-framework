@@ -1,6 +1,9 @@
 <?php
 
 
+	declare( strict_types = 1 );
+
+
 	namespace WPEmerge\Contracts;
 
 
@@ -29,5 +32,9 @@
 		 * @return ResponseInterface
 		 */
 		public function transformToResponse( RequestInterface $request, \Throwable $exception ) :ResponseInterface;
+
+		public function writeToOutput(bool $false = false ) :void;
+
+		public function allowQuit( bool $false = false ) :void;
 
 	}

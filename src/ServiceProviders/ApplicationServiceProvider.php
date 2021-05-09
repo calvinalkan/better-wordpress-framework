@@ -1,6 +1,9 @@
 <?php
 
 
+	declare( strict_types = 1 );
+
+
 	namespace WPEmerge\ServiceProviders;
 
 	use WPEmerge\Contracts\ServiceProvider;
@@ -16,6 +19,7 @@
 
 
 		public function register() :void  {
+
 
 
 			$this->config->extend('strict_mode', false );

@@ -1,6 +1,9 @@
 <?php
 
 
+	declare( strict_types = 1 );
+
+
 	namespace WPEmerge\Factories;
 
 	use Whoops\Handler\JsonResponseHandler;
@@ -87,8 +90,8 @@
 			}
 
 			$whoops->appendHandler($pretty_page_handler);
-			$whoops->allowQuit(false);
-			$whoops->writeToOutput(false);
+			$whoops->allowQuit(true);
+			$whoops->writeToOutput(true);
 
 
 			return new DebugErrorHandler($whoops, $this->is_ajax);

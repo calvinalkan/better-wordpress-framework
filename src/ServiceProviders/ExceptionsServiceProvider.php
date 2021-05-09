@@ -1,6 +1,9 @@
 <?php
 
 
+	declare( strict_types = 1 );
+
+
 	namespace WPEmerge\ServiceProviders;
 
 	use WPEmerge\Contracts\ErrorHandlerInterface;
@@ -24,7 +27,6 @@
 
 
 			$this->container->singleton( ErrorHandlerInterface::class, function () {
-
 
 				$request = $this->container->make( RequestInterface::class );
 

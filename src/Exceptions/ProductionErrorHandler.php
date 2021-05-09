@@ -1,6 +1,9 @@
 <?php
 
 
+	declare( strict_types = 1 );
+
+
 	namespace WPEmerge\Exceptions;
 
 	use WPEmerge\Contracts\ResponseInterface;
@@ -36,12 +39,22 @@
 
 		}
 
-
-
-		protected function defaultResponse(RequestInterface $request) : Response {
+		protected function defaultResponse(RequestInterface $request) : ResponseInterface {
 
 			return (new Response( 'Internal Server Error', 500))
 				->setType($this->contentType($request));
+
+		}
+
+		public function writeToOutput( bool $false = false ) : void {
+
+			//
+
+		}
+
+		public function allowQuit( bool $false = false ) : void {
+
+			//
 
 		}
 
