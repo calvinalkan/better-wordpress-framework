@@ -136,10 +136,10 @@
 
 			$whoops->appendHandler($pretty_page_handler);
 			$whoops->allowQuit(false);
-			$whoops->writeToOutput(false);
+			$whoops->writeToOutput(true);
 
 
-			return new DebugErrorHandler( $whoops, $is_ajax );
+			return new DebugErrorHandler( $whoops );
 
 		}
 

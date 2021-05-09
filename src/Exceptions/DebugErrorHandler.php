@@ -20,17 +20,12 @@
 		/** @var \Whoops\RunInterface */
 		private $whoops;
 
-		/** @var bool */
-		private $is_ajax;
-
 		private $registered = false;
 
 
-
-		public function __construct( RunInterface $whoops,  $is_ajax = false) {
+		public function __construct( RunInterface $whoops) {
 
 			$this->whoops = $whoops;
-			$this->is_ajax = $is_ajax;
 
 		}
 
@@ -63,24 +58,12 @@
 
 		}
 
-		public function handleException( $exception, $in_routing_flow = false )  {
+		public function handleException( $exception)  {
 
 
 			$method = RunInterface::EXCEPTION_HANDLER;
 
-			$output = $this->whoops->{$method}( $exception );
-
-			$response = new Response( $output, 500 );
-			$response->setType( ( $this->is_ajax ) ? 'application/json' : 'text/html' );
-
-			if (  $in_routing_flow ) {
-
-				return $response;
-
-			}
-
-			$response->sendHeaders();
-			$response->sendBody();
+			$this->whoops->{$method}( $exception );
 
 			ExceptionHandled::dispatch();
 
@@ -102,9 +85,7 @@
 
 		public function transformToResponse( RequestInterface $request, Throwable $exception ) : ResponseInterface {
 
-
-			return $this->handleException( $exception, true );
-
+			 $this->handleException( $exception);
 
 		}
 

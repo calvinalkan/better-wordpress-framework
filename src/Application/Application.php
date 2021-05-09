@@ -78,9 +78,6 @@
 			);
 
 
-			trigger_error('ERROR', E_USER_ERROR);
-
-
 			$this->loadServiceProviders( $this->container() );
 
 			$this->bootstrapped = true;
