@@ -7,8 +7,6 @@
 	namespace Tests\integration\HttpKernel;
 
 	use PHPUnit\Framework\TestCase;
-	use Psr\Http\Message\ResponseInterface;
-	use Tests\stubs\TestResponse;
 	use Tests\TestRequest;
 	use WPEmerge\Application\ApplicationEvent;
 	use WPEmerge\Events\BodySent;

@@ -11,7 +11,7 @@
 	use Tests\AssertsResponse;
 	use WPEmerge\Contracts\ErrorHandlerInterface;
 	use WPEmerge\Contracts\ResponseInterface;
-	use WPEmerge\Factories\ExceptionHandlerFactory;
+	use WPEmerge\Factories\ErrorHandlerFactory;
 
 	class DebugErrorHandlerTest extends TestCase {
 
@@ -61,7 +61,7 @@
 
 		private function newErrorHandler (bool $is_ajax = false ) : ErrorHandlerInterface {
 
-			return (( new ExceptionHandlerFactory(true, $is_ajax) ))->create();
+			return (( new ErrorHandlerFactory(true, $is_ajax) ))->create();
 
 		}
 

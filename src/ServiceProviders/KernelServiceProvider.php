@@ -60,10 +60,16 @@
 
 				);
 
-
 				$kernel->setRouteMiddlewareAliases( $this->config['middleware'] );
 				$kernel->setMiddlewareGroups( $this->config['middleware_groups'] );
 				$kernel->setMiddlewarePriority( $this->config['middleware_priority'] );
+
+				if( $this->config->get(ApplicationServiceProvider::STRICT_MODE, false)) {
+
+					$kernel->runInTakeoverMode();
+
+				}
+
 
 				return $kernel;
 

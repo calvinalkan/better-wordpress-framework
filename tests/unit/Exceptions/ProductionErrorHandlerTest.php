@@ -12,7 +12,7 @@
 	use Tests\stubs\TestResponseService;
 	use WPEmerge\Contracts\ErrorHandlerInterface;
 	use WPEmerge\Exceptions\Exception;
-	use WPEmerge\Factories\ExceptionHandlerFactory;
+	use WPEmerge\Factories\ErrorHandlerFactory;
 
 	class ProductionErrorHandlerTest extends TestCase {
 
@@ -53,7 +53,7 @@
 
 		private function newErrorHandler (bool $is_ajax = false ) : ErrorHandlerInterface {
 
-			return (( new ExceptionHandlerFactory(false, $is_ajax) ))->create();
+			return (( new ErrorHandlerFactory(false, $is_ajax) ))->create();
 
 		}
 

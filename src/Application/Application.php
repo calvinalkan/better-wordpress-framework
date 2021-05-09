@@ -8,11 +8,10 @@
 
 	use Contracts\ContainerAdapter;
 	use SniccoAdapter\BaseContainerAdapter;
-	use Throwable;
 	use WPEmerge\Contracts\ErrorHandlerInterface;
 	use WPEmerge\Contracts\RequestInterface;
 	use WPEmerge\Exceptions\ConfigurationException;
-	use WPEmerge\Factories\ExceptionHandlerFactory;
+	use WPEmerge\Factories\ErrorHandlerFactory;
 	use WPEmerge\Http\Request;
 	use WPEmerge\ServiceProviders\ApplicationServiceProvider;
 
@@ -78,6 +77,7 @@
 				$this->config->get( 'exceptions.editor', 'phpstorm' )
 			);
 
+
 			$this->loadServiceProviders( $this->container() );
 
 			$this->bootstrapped = true;
@@ -109,13 +109,19 @@
 
 		}
 
+		/**
+		 * @throws \WPEmerge\Exceptions\ConfigurationException
+		 */
 		private function createErrorHandler( string $editor ) : ErrorHandlerInterface {
 
-			$error_handler = ( new ExceptionHandlerFactory(
+			$request = $this->container()->make(RequestInterface::class);
+
+			$error_handler = ErrorHandlerFactory::make(
+				$request,
 				WP_DEBUG,
-				$this->container()->make( RequestInterface::class )->isAjax(),
-				$editor )
-			)->create();
+				$request->isAjax(),
+				$editor
+			);
 
 			$error_handler->register();
 

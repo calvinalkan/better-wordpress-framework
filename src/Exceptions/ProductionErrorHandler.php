@@ -46,22 +46,6 @@
 
 		}
 
-		public function writeToOutput( bool $false = false ) : void {
 
-			//
-
-		}
-
-		public function allowQuit( bool $false = false ) : void {
-
-			//
-
-		}
-
-		public function isRegistered() : void {
-
-			//
-
-		}
 
 	}

@@ -24,11 +24,17 @@
 
 		private $registered = false;
 
-		public function __construct( RunInterface $whoops, $is_ajax = false ) {
+		/**
+		 * @var \WPEmerge\Contracts\RequestInterface
+		 */
+		private $request;
+
+		public function __construct( RunInterface $whoops, RequestInterface $request, $is_ajax = false) {
 
 			$this->whoops = $whoops;
-
 			$this->is_ajax = $is_ajax;
+			$this->request = $request;
+
 		}
 
 		public function register() {
@@ -39,13 +45,9 @@
 
 			}
 
-			// $this->whoops->register();
 			set_exception_handler( [ $this, 'handleException' ] );
-			set_error_handler(function ($errno, $errstr, $errfile, $errline ) {
-				if (error_reporting()) {
-					throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);
-				}
-			});
+			set_error_handler( [ $this, 'handleError' ] );
+
 
 			$this->registered = true;
 
@@ -57,7 +59,6 @@
 				return;
 			}
 
-			// $this->whoops->unregister();
 			restore_exception_handler();
 			restore_error_handler();
 
@@ -65,7 +66,7 @@
 
 		}
 
-		public function handleException( $exception, $in_routing_flow = false  ) {
+		public function handleException( $exception, $in_routing_flow = false )  {
 
 			$method = RunInterface::EXCEPTION_HANDLER;
 
@@ -76,21 +77,37 @@
 			$response = new Response( $output, 500 );
 			$response->setType( $content_type );
 
-			if ( $in_routing_flow  ) {
+			if (  $in_routing_flow ) {
 
 				return $response;
 
 			}
 
+			$response->prepareForSending($this->request);
 			$response->sendHeaders();
 			$response->sendBody();
+
+			wp_die();
+
+		}
+
+		public function handleError( $errno, $errstr, $errfile, $errline ) {
+
+			if ( error_reporting() ) {
+
+				$this->handleException(
+					new \ErrorException( $errstr, 0, $errno, $errfile, $errline ),
+				);
+
+			}
+
 
 		}
 
 		public function transformToResponse( RequestInterface $request, Throwable $exception ) : ResponseInterface {
 
 
-			return $this->handleException($exception, true );
+			return $this->handleException( $exception, true );
 
 			// $method = RunInterface::EXCEPTION_HANDLER;
 			//
@@ -112,22 +129,5 @@
 
 		}
 
-		public function writeToOutput( bool $false = false ) : void {
-
-			$this->whoops->writeToOutput( $false );
-
-		}
-
-		public function allowQuit( bool $false = false ) : void {
-
-			$this->whoops->allowQuit( $false );
-
-		}
-
-		public function isRegistered() : bool {
-
-			return $this->registered;
-
-		}
 
 	}

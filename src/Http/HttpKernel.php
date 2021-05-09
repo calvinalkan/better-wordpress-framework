@@ -78,7 +78,6 @@
 
 			try {
 
-
 				$this->syncMiddlewareToRouter();
 
 				$this->response = $this->sendRequestThroughRouter( $request_event->request );
@@ -99,7 +98,6 @@
 			if ( ! $this->is_takeover_mode ) {
 
 				$this->error_handler->unregister();
-
 
 			}
 
