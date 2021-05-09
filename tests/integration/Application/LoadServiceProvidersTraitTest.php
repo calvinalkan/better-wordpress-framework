@@ -52,7 +52,7 @@
 			];
 
 			$app::make();
-			$app::bootstrap( $user_config );
+			$app::boot( $user_config );
 
 			$container = $app::container();
 
@@ -83,7 +83,7 @@
 			];
 
 			$app::make();
-			$app::bootstrap( $user_config );
+			$app::boot( $user_config );
 
 
 		}
@@ -101,7 +101,7 @@
 			];
 
 			$app::make();
-			$app::bootstrap( $user_config );
+			$app::boot( $user_config );
 
 			$this->assertSame( 'bar', $app::container()['foo'] );
 
@@ -121,7 +121,7 @@
 			];
 
 			$app::make();
-			$app::bootstrap( $user_config );
+			$app::boot( $user_config );
 
 			$this->assertSame( 'baz', $app::container()['bar'] );
 
@@ -142,7 +142,7 @@
 			];
 
 			$app::make();
-			$app::bootstrap( $user_config );
+			$app::boot( $user_config );
 
 			$this->assertSame( 'bar', $app::resolve('config_value') );
 

@@ -90,8 +90,8 @@
 			}
 
 			$whoops->appendHandler($pretty_page_handler);
-			$whoops->allowQuit(true);
-			$whoops->writeToOutput(true);
+			$whoops->allowQuit(false);
+
 
 
 			return new DebugErrorHandler($whoops, $this->is_ajax);

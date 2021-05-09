@@ -3,16 +3,12 @@
 
 	declare( strict_types = 1 );
 
-
 	namespace Tests\unit\Exceptions;
 
 
-	use Codeception\TestCase\WPTestCase;
 	use Exception;
 	use PHPUnit\Framework\TestCase;
 	use Tests\AssertsResponse;
-	use Tests\stubs\TestResponseService;
-	use Tests\TestRequest;
 	use WPEmerge\Contracts\ErrorHandlerInterface;
 	use WPEmerge\Contracts\ResponseInterface;
 	use WPEmerge\Factories\ExceptionHandlerFactory;
@@ -26,6 +22,8 @@
 
 
 			$handler = $this->newErrorHandler();
+
+			$handler->writeToOutput(false);
 
 			$exception = new Exception('Whoops Exception');
 
@@ -43,6 +41,7 @@
 		public function debug_data_is_provided_in_the_json_response_for_ajax_request () {
 
 			$handler = $this->newErrorHandler(TRUE);
+			$handler->writeToOutput(false);
 
 			$exception = new Exception('Whoops Ajax Exception');
 
