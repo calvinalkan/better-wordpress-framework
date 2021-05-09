@@ -11,6 +11,7 @@
 	use WPEmerge\Contracts\ErrorHandlerInterface;
 	use WPEmerge\Contracts\RequestInterface;
 	use WPEmerge\Contracts\ResponseInterface;
+	use WPEmerge\Events\ExceptionHandled;
 	use WPEmerge\Http\Response;
 
 	class DebugErrorHandler implements ErrorHandlerInterface {
@@ -24,16 +25,12 @@
 
 		private $registered = false;
 
-		/**
-		 * @var \WPEmerge\Contracts\RequestInterface
-		 */
-		private $request;
 
-		public function __construct( RunInterface $whoops, RequestInterface $request, $is_ajax = false) {
+
+		public function __construct( RunInterface $whoops,  $is_ajax = false) {
 
 			$this->whoops = $whoops;
 			$this->is_ajax = $is_ajax;
-			$this->request = $request;
 
 		}
 
@@ -68,14 +65,13 @@
 
 		public function handleException( $exception, $in_routing_flow = false )  {
 
+
 			$method = RunInterface::EXCEPTION_HANDLER;
 
 			$output = $this->whoops->{$method}( $exception );
 
-			$content_type = ( $this->is_ajax ) ? 'application/json' : 'text/html';
-
 			$response = new Response( $output, 500 );
-			$response->setType( $content_type );
+			$response->setType( ( $this->is_ajax ) ? 'application/json' : 'text/html' );
 
 			if (  $in_routing_flow ) {
 
@@ -83,11 +79,11 @@
 
 			}
 
-			$response->prepareForSending($this->request);
 			$response->sendHeaders();
 			$response->sendBody();
 
-			wp_die();
+			ExceptionHandled::dispatch();
+
 
 		}
 
@@ -109,23 +105,6 @@
 
 			return $this->handleException( $exception, true );
 
-			// $method = RunInterface::EXCEPTION_HANDLER;
-			//
-			// $output = $this->whoops->{$method}( $exception );
-			//
-			// $content_type = ( $this->is_ajax ) ? 'application/json' : 'text/html';
-			//
-			// $response = new Response($output, 500);
-			// $response->setType($content_type);
-			//
-			// if ( $this->outside_routing_flow ) {
-			//
-			// 	$response->sendHeaders();
-			// 	$response->sendBody();
-			//
-			// }
-			//
-			// return $response;
 
 		}
 

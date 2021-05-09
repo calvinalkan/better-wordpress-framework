@@ -10,9 +10,11 @@
 	use Contracts\ContainerAdapter;
 	use WPEmerge\Application\ApplicationEvent;
 	use WPEmerge\Contracts\ServiceProvider;
+	use WPEmerge\Events\ExceptionHandled;
 	use WPEmerge\Events\IncomingWebRequest;
 	use WPEmerge\Events\LoadedWpAdmin;
 	use WPEmerge\AjaxShutdownHandler;
+	use WPEmerge\Exceptions\ShutdownHandler;
 	use WPEmerge\Factories\DynamicHooksFactory;
 	use WPEmerge\Events\AdminBodySendable;
 	use WPEmerge\Events\IncomingAdminRequest;
@@ -60,6 +62,12 @@
 				AjaxShutdownHandler::class . '@shutdownWp',
 
 			],
+
+			ExceptionHandled::class => [
+
+				ShutdownHandler::class . '@exceptionHandled'
+
+			]
 
 		];
 

@@ -11,6 +11,7 @@
 	use Throwable;
 	use WPEmerge\Contracts\ResponsableInterface;
 	use WPEmerge\Contracts\ErrorHandlerInterface as ErrorHandler;
+	use WPEmerge\Events\ExceptionHandled;
 	use WPEmerge\Events\HeadersSent;
 	use WPEmerge\Events\IncomingAdminRequest;
 	use WPEmerge\Events\IncomingRequest;
@@ -24,7 +25,6 @@
 	class HttpKernel {
 
 		use HoldsMiddlewareDefinitions;
-
 
 		/** @var \WPEmerge\Routing\Router */
 		private $router;
@@ -41,10 +41,6 @@
 		/** @var RequestInterface */
 		private $request;
 
-		/**
-		 * @var bool
-		 */
-		private $caught_exception = false;
 
 		private $is_test_mode = false;
 
@@ -59,9 +55,9 @@
 
 		) {
 
-			$this->router           = $router;
-			$this->container        = $container;
-			$this->error_handler    = $error_handler;
+			$this->router        = $router;
+			$this->container     = $container;
+			$this->error_handler = $error_handler;
 
 		}
 
@@ -84,7 +80,7 @@
 
 			}
 
-			catch (  Throwable $exception ) {
+			catch ( Throwable $exception ) {
 
 				$this->response = $this->error_handler->transformToResponse(
 					$request_event->request, $exception
@@ -95,11 +91,8 @@
 
 			$this->sendResponse();
 
-			if ( ! $this->is_takeover_mode ) {
+			$this->error_handler->unregister();
 
-				$this->error_handler->unregister();
-
-			}
 
 		}
 
@@ -121,13 +114,13 @@
 
 		}
 
-		public function runInTestMode() :void {
+		public function runInTestMode() : void {
 
 			$this->is_test_mode = true;
 
 		}
 
-		public function runInTakeoverMode() :void {
+		public function runInTakeoverMode() : void {
 
 			$this->is_takeover_mode = true;
 
@@ -143,7 +136,7 @@
 
 			}
 
-			$this->response = $this->response->prepareForSending($this->request);
+			$this->response = $this->response->prepareForSending( $this->request );
 
 			$this->sendHeaders();
 
@@ -173,7 +166,7 @@
 		}
 
 		/** @todo handle the case where a route matched but invalid response was returned */
-		private function prepareResponse( $response ) :?ResponseInterface {
+		private function prepareResponse( $response ) : ?ResponseInterface {
 
 			if ( $response instanceof ResponseInterface ) {
 
@@ -183,7 +176,7 @@
 
 			if ( is_string( $response ) ) {
 
-				return ( new Response( $response ) )->setType('text/html');
+				return ( new Response( $response ) )->setType( 'text/html' );
 
 			}
 
@@ -229,10 +222,10 @@
 			$middleware = $this->withMiddleware() ? $this->middleware_groups['global'] ?? [] : [];
 
 			$response = $pipeline->send( $request )
-			                ->through( $middleware )
-			                ->then( $this->dispatchToRouter() );
+			                     ->through( $middleware )
+			                     ->then( $this->dispatchToRouter() );
 
-			return $this->prepareResponse($response);
+			return $this->prepareResponse( $response );
 
 
 		}
@@ -285,7 +278,7 @@
 
 		}
 
-		private function runGlobalMiddlewareWithoutMatchingRoute () : bool {
+		private function runGlobalMiddlewareWithoutMatchingRoute() : bool {
 
 			return $this->is_takeover_mode;
 

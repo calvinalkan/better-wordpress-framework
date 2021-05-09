@@ -139,7 +139,7 @@
 			$whoops->writeToOutput(false);
 
 
-			return new DebugErrorHandler( $whoops, $request,  $is_ajax );
+			return new DebugErrorHandler( $whoops, $is_ajax );
 
 		}
 
