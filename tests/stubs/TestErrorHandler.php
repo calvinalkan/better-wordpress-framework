@@ -49,4 +49,10 @@
 			//
 		}
 
+		public function isRegistered() : bool {
+
+			return true;
+
+		}
+
 	}

@@ -58,4 +58,10 @@
 
 		}
 
+		public function isRegistered() : void {
+
+			//
+
+		}
+
 	}

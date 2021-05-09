@@ -10,7 +10,6 @@
 	use WPEmerge\Contracts\ResponseInterface;
 	use Throwable;
 	use WPEmerge\Contracts\ResponsableInterface;
-	use WPEmerge\Contracts\ResponseServiceInterface as ResponseService;
 	use WPEmerge\Contracts\ErrorHandlerInterface as ErrorHandler;
 	use WPEmerge\Events\HeadersSent;
 	use WPEmerge\Events\IncomingAdminRequest;
@@ -69,8 +68,6 @@
 
 		public function handle( IncomingRequest $request_event ) : void {
 
-
-			// whoops
 			$this->error_handler->register();
 
 			if ( $this->forceRouteMatch() ) {
@@ -81,13 +78,14 @@
 
 			try {
 
+
 				$this->syncMiddlewareToRouter();
 
 				$this->response = $this->sendRequestThroughRouter( $request_event->request );
 
 			}
 
-			catch ( Throwable $exception ) {
+			catch (  Throwable $exception ) {
 
 				$this->response = $this->error_handler->transformToResponse(
 					$request_event->request, $exception
@@ -98,7 +96,12 @@
 
 			$this->sendResponse();
 
-			$this->error_handler->unregister();
+			if ( ! $this->is_takeover_mode ) {
+
+				$this->error_handler->unregister();
+
+
+			}
 
 		}
 

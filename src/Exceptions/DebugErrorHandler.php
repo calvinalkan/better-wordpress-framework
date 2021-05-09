@@ -22,6 +22,8 @@
 		/** @var bool */
 		private $is_ajax;
 
+		private $registered = false;
+
 		public function __construct( RunInterface $whoops, $is_ajax = false ) {
 
 			$this->whoops = $whoops;
@@ -31,17 +33,39 @@
 
 		public function register() {
 
-			$this->whoops->register();
+			if ( $this->registered ) {
+
+				return;
+
+			}
+
+			// $this->whoops->register();
+			set_exception_handler( [ $this, 'handleException' ] );
+			set_error_handler(function ($errno, $errstr, $errfile, $errline ) {
+				if (error_reporting()) {
+					throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);
+				}
+			});
+
+			$this->registered = true;
 
 		}
 
 		public function unregister() {
 
-			$this->whoops->unregister();
+			if ( ! $this->registered ) {
+				return;
+			}
+
+			// $this->whoops->unregister();
+			restore_exception_handler();
+			restore_error_handler();
+
+			$this->registered = false;
 
 		}
 
-		public function transformToResponse( RequestInterface $request, Throwable $exception ) : ResponseInterface {
+		public function handleException( $exception, $in_routing_flow = false  ) {
 
 			$method = RunInterface::EXCEPTION_HANDLER;
 
@@ -49,20 +73,60 @@
 
 			$content_type = ( $this->is_ajax ) ? 'application/json' : 'text/html';
 
-			return (new Response($output, 500))->setType($content_type);
+			$response = new Response( $output, 500 );
+			$response->setType( $content_type );
 
+			if ( $in_routing_flow  ) {
+
+				return $response;
+
+			}
+
+			$response->sendHeaders();
+			$response->sendBody();
+
+		}
+
+		public function transformToResponse( RequestInterface $request, Throwable $exception ) : ResponseInterface {
+
+
+			return $this->handleException($exception, true );
+
+			// $method = RunInterface::EXCEPTION_HANDLER;
+			//
+			// $output = $this->whoops->{$method}( $exception );
+			//
+			// $content_type = ( $this->is_ajax ) ? 'application/json' : 'text/html';
+			//
+			// $response = new Response($output, 500);
+			// $response->setType($content_type);
+			//
+			// if ( $this->outside_routing_flow ) {
+			//
+			// 	$response->sendHeaders();
+			// 	$response->sendBody();
+			//
+			// }
+			//
+			// return $response;
 
 		}
 
 		public function writeToOutput( bool $false = false ) : void {
 
-			$this->whoops->writeToOutput($false);
+			$this->whoops->writeToOutput( $false );
 
 		}
 
 		public function allowQuit( bool $false = false ) : void {
 
-			$this->whoops->allowQuit($false);
+			$this->whoops->allowQuit( $false );
+
+		}
+
+		public function isRegistered() : bool {
+
+			return $this->registered;
 
 		}
 

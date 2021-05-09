@@ -37,4 +37,6 @@
 
 		public function allowQuit( bool $false = false ) :void;
 
+		// public function isRegistered () :bool;
+
 	}

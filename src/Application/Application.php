@@ -7,13 +7,14 @@
 	namespace WPEmerge\Application;
 
 	use Contracts\ContainerAdapter;
-	use Illuminate\Config\Repository;
 	use SniccoAdapter\BaseContainerAdapter;
+	use Throwable;
+	use WPEmerge\Contracts\ErrorHandlerInterface;
 	use WPEmerge\Contracts\RequestInterface;
 	use WPEmerge\Exceptions\ConfigurationException;
 	use WPEmerge\Factories\ExceptionHandlerFactory;
 	use WPEmerge\Http\Request;
-	use WPEmerge\Support\VariableBag;
+	use WPEmerge\ServiceProviders\ApplicationServiceProvider;
 
 	class Application {
 
@@ -21,7 +22,6 @@
 		use ManagesAliases;
 		use LoadsServiceProviders;
 		use HasContainer;
-
 
 		private $bootstrapped = false;
 
@@ -31,48 +31,16 @@
 		private $config;
 
 
-		public function __construct( ContainerAdapter $container) {
+		public function __construct( ContainerAdapter $container ) {
 
 			$this->setContainerAdapter( $container );
-			$this->container()[ Application::class ]   = $this;
+			$this->container()[ Application::class ]      = $this;
 			$this->container()[ ContainerAdapter::class ] = $this->container();
+			$this->container()->instance( RequestInterface::class, Request::capture() );
 
 
 		}
 
-		public function captureRequest ( RequestInterface $request = null ) : Application {
-
-			$this->container()->instance(
-				RequestInterface::class,
-				$request ??  Request::capture()
-			);
-
-
-			return $this;
-
-
-		}
-
-		public function handleErrors ( string $editor = 'phpstorm' ) : Application {
-
-			$request = $this->container()->make(RequestInterface::class);
-
-			$error_handler = ( new ExceptionHandlerFactory(
-				WP_DEBUG,
-				$request->isAjax(),
-				$editor)
-			)->create();
-
-			$this->container()->instance(ExceptionHandlerFactory::class, $error_handler);
-
-			$error_handler->register();
-
-			$error_handler->allowQuit(true);
-			$error_handler->writeToOutput(true);
-
-			return $this;
-
-		}
 
 		/**
 		 * Make and assign a new application instance.
@@ -95,8 +63,7 @@
 		 *
 		 * @throws \WPEmerge\Exceptions\ConfigurationException
 		 */
-		public function boot( array $config = [] ) :void {
-
+		public function boot( array $config = [] ) : void {
 
 
 			if ( $this->bootstrapped ) {
@@ -107,25 +74,60 @@
 
 			$this->bindConfig( $config );
 
-			$this->loadServiceProviders( $this->container());
+			$error_handler = $this->createErrorHandler(
+				$this->config->get( 'exceptions.editor', 'phpstorm' )
+			);
+
+			$this->loadServiceProviders( $this->container() );
 
 			$this->bootstrapped = true;
+
+			// If we would always unregister here it would not be possible to handle
+			// any errors that happen between this point and the the triggering of the
+			// hooks that run the HttpKernel.
+			if ( ! $this->isTakeOverMode() ) {
+
+				$error_handler->unregister();
+
+			}
 
 
 		}
 
 		private function bindConfig( array $config ) {
 
-			$config = new ApplicationConfig($config);
+			$config = new ApplicationConfig( $config );
 
-			$this->container()->instance(ApplicationConfig::class, $config );
+			$this->container()->instance( ApplicationConfig::class, $config );
 			$this->config = $config;
 
 		}
 
-		public function config (string $key, $default = null ) {
+		public function config( string $key, $default = null ) {
 
-			return $this->config->get($key, $default);
+			return $this->config->get( $key, $default );
+
+		}
+
+		private function createErrorHandler( string $editor ) : ErrorHandlerInterface {
+
+			$error_handler = ( new ExceptionHandlerFactory(
+				WP_DEBUG,
+				$this->container()->make( RequestInterface::class )->isAjax(),
+				$editor )
+			)->create();
+
+			$error_handler->register();
+
+			$this->container()->instance( ErrorHandlerInterface::class, $error_handler );
+
+			return $error_handler;
+
+		}
+
+		private function isTakeOverMode() {
+
+			return $this->config->get( ApplicationServiceProvider::STRICT_MODE, false );
 
 		}
 
