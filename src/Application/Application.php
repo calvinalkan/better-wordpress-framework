@@ -29,7 +29,6 @@
 		 */
 		private $config;
 
-
 		public function __construct( ContainerAdapter $container ) {
 
 			$this->setContainerAdapter( $container );
@@ -39,7 +38,6 @@
 
 
 		}
-
 
 		/**
 		 * Make and assign a new application instance.
@@ -73,11 +71,6 @@
 
 			$this->bindConfigInstance( $config );
 
-			$error_handler = $this->createErrorHandler(
-				$this->config->get( 'exceptions.editor', 'phpstorm' )
-			);
-
-
 			$this->loadServiceProviders( $this->container() );
 
 			$this->bootstrapped = true;
@@ -87,6 +80,8 @@
 			// hooks that run the HttpKernel.
 			if ( ! $this->isTakeOverMode() ) {
 
+				/** @var ErrorHandlerInterface $error_handler */
+				$error_handler = $this->container()->make(ErrorHandlerInterface::class);
 				$error_handler->unregister();
 
 			}
@@ -106,28 +101,6 @@
 		public function config( string $key, $default = null ) {
 
 			return $this->config->get( $key, $default );
-
-		}
-
-		/**
-		 * @throws \WPEmerge\Exceptions\ConfigurationException
-		 */
-		private function createErrorHandler( string $editor ) : ErrorHandlerInterface {
-
-			$request = $this->container()->make(RequestInterface::class);
-
-			$error_handler = ErrorHandlerFactory::make(
-				$this->container(),
-				$this->config->get('debug', false ),
-				$request->isAjax(),
-				$editor
-			);
-
-			$error_handler->register();
-
-			$this->container()->instance( ErrorHandlerInterface::class, $error_handler );
-
-			return $error_handler;
 
 		}
 

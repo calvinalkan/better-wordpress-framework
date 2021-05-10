@@ -7,12 +7,12 @@
 	namespace WPEmerge\Exceptions;
 
 	use Contracts\ContainerAdapter;
+	use Psr\Log\LoggerInterface;
 	use WPEmerge\Contracts\RequestInterface;
 	use WPEmerge\Contracts\ResponseInterface;
 	use Throwable;
 	use WPEmerge\Contracts\ErrorHandlerInterface;
 	use WPEmerge\Events\UnrecoverableExceptionHandled;
-	use WPEmerge\Http\Request;
 	use WPEmerge\Http\Response;
 	use WPEmerge\Traits\HandlesExceptions;
 
@@ -30,10 +30,17 @@
 		 */
 		private $container;
 
-		public function __construct( ContainerAdapter $container, bool $is_ajax ) {
+		/**
+		 * @var \Psr\Log\LoggerInterface
+		 */
+		private $logger;
+
+		public function __construct( ContainerAdapter $container, LoggerInterface $logger, bool $is_ajax ) {
 
 			$this->is_ajax = $is_ajax;
 			$this->container = $container;
+			$this->logger = $logger;
+
 		}
 
 		public function handleException ( $exception, $in_routing_flow = false, RequestInterface $request = null ) {

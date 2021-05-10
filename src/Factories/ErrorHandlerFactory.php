@@ -7,6 +7,8 @@
 	namespace WPEmerge\Factories;
 
 	use Contracts\ContainerAdapter;
+	use Psr\Log\LoggerInterface;
+	use Psr\Log\NullLogger;
 	use Whoops\Handler\JsonResponseHandler;
 	use Whoops\Handler\PrettyPageHandler;
 	use Whoops\Run;
@@ -36,7 +38,11 @@
 
 			if ( ! $is_debug ) {
 
-				return new ProductionErrorHandler($container, $is_ajax_request);
+				$logger = $container->offsetExists(LoggerInterface::class)
+					? $container->make(LoggerInterface::class)
+					: new NullLogger();
+
+				return new ProductionErrorHandler( $container, $logger,  $is_ajax_request );
 
 			}
 
