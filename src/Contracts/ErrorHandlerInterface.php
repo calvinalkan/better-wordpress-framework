@@ -26,12 +26,11 @@
 		/**
 		 * Get a response representing the specified exception.
 		 *
-		 * @param  RequestInterface  $request
 		 * @param  \Throwable  $exception
 		 *
 		 * @return ResponseInterface
 		 */
-		public function transformToResponse( RequestInterface $request, \Throwable $exception ) :?ResponseInterface;
+		public function transformToResponse( \Throwable $exception ) :?ResponseInterface;
 
 
 

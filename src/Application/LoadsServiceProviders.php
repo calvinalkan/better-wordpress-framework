@@ -36,6 +36,7 @@
 		 * @var string[]
 		 */
 		private $service_providers = [
+			EventServiceProvider::class,
 			AliasServiceProvider::class,
 			FactoryServiceProvider::class,
 			ApplicationServiceProvider::class,
@@ -45,7 +46,6 @@
 			ResponsesServiceProvider::class,
 			RoutingServiceProvider::class,
 			ViewServiceProvider::class,
-			EventServiceProvider::class
 		];
 
 

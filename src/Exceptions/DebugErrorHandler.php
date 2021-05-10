@@ -11,15 +11,15 @@
 	use WPEmerge\Contracts\ErrorHandlerInterface;
 	use WPEmerge\Contracts\RequestInterface;
 	use WPEmerge\Contracts\ResponseInterface;
-	use WPEmerge\Events\ExceptionHandled;
-	use WPEmerge\Http\Response;
+	use WPEmerge\Events\UnrecoverableExceptionHandled;
+	use WPEmerge\Traits\HandlesExceptions;
 
 	class DebugErrorHandler implements ErrorHandlerInterface {
 
+		use HandlesExceptions;
+
 		/** @var \Whoops\RunInterface */
 		private $whoops;
-
-		private $registered = false;
 
 		public function __construct( RunInterface $whoops) {
 
@@ -27,63 +27,19 @@
 
 		}
 
-		public function register() {
-
-			if ( $this->registered ) {
-
-				return;
-
-			}
-
-			set_exception_handler( [ $this, 'handleException' ] );
-			set_error_handler( [ $this, 'handleError' ] );
-
-
-			$this->registered = true;
-
-		}
-
-		public function unregister() {
-
-			if ( ! $this->registered ) {
-				return;
-			}
-
-			restore_exception_handler();
-			restore_error_handler();
-
-			$this->registered = false;
-
-		}
-
-		public function handleException( $exception)  {
+		public function handleException( $exception )  {
 
 
 			$method = RunInterface::EXCEPTION_HANDLER;
 
 			$this->whoops->{$method}( $exception );
 
-			ExceptionHandled::dispatch();
+			UnrecoverableExceptionHandled::dispatch();
 
 
 		}
 
-		public function handleError( $errno, $errstr, $errfile, $errline ) {
-
-			$foo = 'bar';
-
-			if ( error_reporting() ) {
-
-				$this->handleException(
-					new \ErrorException( $errstr, 0, $errno, $errfile, $errline ),
-				);
-
-			}
-
-
-		}
-
-		public function transformToResponse( RequestInterface $request, Throwable $exception ) : ?ResponseInterface {
+		public function transformToResponse( Throwable $exception ) : ?ResponseInterface {
 
 			 $this->handleException( $exception);
 

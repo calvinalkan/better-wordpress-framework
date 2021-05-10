@@ -12,6 +12,7 @@
 	use WPEmerge\Events\IncomingAdminRequest;
 	use WPEmerge\Events\IncomingAjaxRequest;
 
+
 	use function get_plugin_page_hook;
 	use function wp_doing_ajax;
 
@@ -65,8 +66,7 @@
 
 		}
 
-		private function createAjaxHooks(RequestInterface $request) {
-
+		private function createAjaxHooks( RequestInterface $request ) {
 
 			$action = ( isset( $_REQUEST['action'] ) ) ? $_REQUEST['action'] : '';
 

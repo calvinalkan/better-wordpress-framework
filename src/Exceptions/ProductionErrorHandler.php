@@ -6,46 +6,89 @@
 
 	namespace WPEmerge\Exceptions;
 
+	use Contracts\ContainerAdapter;
 	use WPEmerge\Contracts\ResponseInterface;
 	use Throwable;
 	use WPEmerge\Contracts\ErrorHandlerInterface;
 	use WPEmerge\Contracts\RequestInterface;
+	use WPEmerge\Events\UnrecoverableExceptionHandled;
+	use WPEmerge\Http\Request;
 	use WPEmerge\Http\Response;
+	use WPEmerge\Traits\HandlesExceptions;
 
 	class ProductionErrorHandler implements ErrorHandlerInterface {
 
-		public function register() {
+		use HandlesExceptions;
 
-			//
+		/**
+		 * @var bool
+		 */
+		private $is_ajax;
+
+		/**
+		 * @var \Contracts\ContainerAdapter
+		 */
+		private $container;
+
+		public function __construct( ContainerAdapter $container, bool $is_ajax ) {
+
+			$this->is_ajax = $is_ajax;
+			$this->container = $container;
+		}
+
+		public function handleException ( $exception, $in_routing_flow = false ) {
+
+			$response = $this->determineResponse($exception);
+
+			if ( $in_routing_flow ) {
+
+				return $response;
+
+			}
+
+			$response->sendHeaders();
+			$response->sendBody();
+
+			// Shuts down the script
+			UnrecoverableExceptionHandled::dispatch();
 
 		}
 
-		public function unregister() {
+		public function transformToResponse( Throwable $exception ) : ResponseInterface {
 
-			//
-
-		}
-
-		public function transformToResponse( RequestInterface $request, Throwable $exception ) : ResponseInterface {
-
-			return $this->defaultResponse($request);
+			return $this->handleException( $exception, true );
 
 
 		}
 
-		private function contentType(RequestInterface $request) : string {
+		private function contentType() : string {
 
-			return ( $request->isAjax() ) ? 'application/json' : 'text/html';
+			return ( $this->is_ajax ) ? 'application/json' : 'text/html';
 
 		}
 
-		private function defaultResponse(RequestInterface $request) : ResponseInterface {
+		private function defaultResponse() : ResponseInterface {
 
 			return (new Response( 'Internal Server Error', 500))
-				->setType($this->contentType($request));
+				->setType($this->contentType());
 
 		}
 
+		private function determineResponse (Throwable $e) : ResponseInterface {
+
+			if ( method_exists($e, 'render') ) {
+
+				/** @var ResponseInterface $response */
+				$response = $e->render();
+
+				return $response->setType($this->contentType());
+
+
+			}
+
+			return $this->defaultResponse();
+
+		}
 
 
 	}

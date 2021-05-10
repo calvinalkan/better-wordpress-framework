@@ -117,7 +117,7 @@
 			$request = $this->container()->make(RequestInterface::class);
 
 			$error_handler = ErrorHandlerFactory::make(
-				$request,
+				$this->container(),
 				$this->config->get('debug', false ),
 				$request->isAjax(),
 				$editor

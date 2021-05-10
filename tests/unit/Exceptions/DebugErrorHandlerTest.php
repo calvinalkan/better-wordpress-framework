@@ -6,11 +6,13 @@
 	namespace Tests\unit\Exceptions;
 
 
-	use Exception;
 	use PHPUnit\Framework\TestCase;
+	use SniccoAdapter\BaseContainerAdapter;
 	use Tests\AssertsResponse;
+	use Tests\stubs\TestException;
 	use Tests\TestRequest;
 	use WPEmerge\Application\ApplicationEvent;
+	use WPEmerge\Events\UnrecoverableExceptionHandled;
 	use WPEmerge\Exceptions\DebugErrorHandler;
 	use WPEmerge\Factories\ErrorHandlerFactory;
 
@@ -40,16 +42,19 @@
 
 			$handler = $this->newErrorHandler();
 
-			$exception = new Exception('Whoops Exception');
+			$exception = new TestException('Whoops Exception');
 
 			ob_start();
-			$handler->transformToResponse( $this->createRequest(), $exception );
+			$handler->transformToResponse( $exception );
 			$output = ob_get_clean();
 
 			$this->assertStringContainsString('Whoops Exception', $output);
 
+			ApplicationEvent::assertDispatchedTimes(UnrecoverableExceptionHandled::class, 1);
 
 		}
+
+
 
 
 		/** @test */
@@ -58,20 +63,23 @@
 			$handler = $this->newErrorHandler(TRUE);
 
 
-			$exception = new Exception('Whoops Ajax Exception');
+			$exception = new TestException('Whoops Ajax Exception');
 
 			ob_start();
-			$handler->transformToResponse( $this->createRequest(), $exception );
+			$handler->transformToResponse(  $exception );
 			$response = ob_get_clean();
 
 			$output = json_decode( $response, true )['error'];
-			$this->assertSame( 'Exception', $output['type'] );
+			$this->assertSame( 'Tests\stubs\TestException', $output['type'] );
 			$this->assertSame( 'Whoops Ajax Exception', $output['message'] );
 			$this->assertArrayHasKey( 'code', $output );
 			$this->assertArrayHasKey( 'trace', $output );
 			$this->assertArrayHasKey( 'file', $output );
 			$this->assertArrayHasKey( 'line', $output );
 			$this->assertArrayHasKey( 'trace', $output );
+
+			ApplicationEvent::assertDispatchedTimes(UnrecoverableExceptionHandled::class, 1);
+
 
 		}
 
@@ -82,7 +90,7 @@
 			$request->overrideGlobals();
 
 			return ErrorHandlerFactory::make(
-				$request,
+				new BaseContainerAdapter(),
 				true,
 				$is_ajax
 			);

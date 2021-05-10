@@ -19,6 +19,7 @@
 		/** @todo clean up all aliases and create tests that they work */
 		public function register() :void {
 
+
 			$app = $this->container->make(Application::class);
 
 			$this->applicationAliases($app);

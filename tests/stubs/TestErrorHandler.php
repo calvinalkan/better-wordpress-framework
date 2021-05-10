@@ -29,15 +29,10 @@
 		/**
 		 * @throws \Exception
 		 */
-		public function transformToResponse( RequestInterface $request, \Throwable $exception ) :ResponseInterface {
+		public function transformToResponse( \Throwable $exception ) :ResponseInterface {
 
-			if ( $exception->getMessage() !== self::bypass_messsage ) {
+			throw $exception;
 
-				throw $exception;
-
-			}
-
-			return new TestResponse($request);
 
 		}
 
