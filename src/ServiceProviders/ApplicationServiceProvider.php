@@ -6,6 +6,7 @@
 
 	namespace WPEmerge\ServiceProviders;
 
+	use test\Mockery\HasUnknownClassAsTypeHintOnMethod;
 	use WPEmerge\Contracts\ServiceProvider;
 	use WPEmerge\Exceptions\Exception;
 	use WPEmerge\Support\Path;

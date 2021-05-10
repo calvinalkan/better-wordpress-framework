@@ -9,7 +9,6 @@
 	use PHPUnit\Framework\TestCase;
 	use Tests\AssertsResponse;
 	use WPEmerge\Contracts\ResponseInterface;
-	use Tests\stubs\TestResponseService;
 	use WPEmerge\Contracts\ErrorHandlerInterface;
 	use WPEmerge\Exceptions\Exception;
 	use WPEmerge\Factories\ErrorHandlerFactory;
@@ -53,7 +52,7 @@
 
 		private function newErrorHandler (bool $is_ajax = false ) : ErrorHandlerInterface {
 
-			return (( new ErrorHandlerFactory(false, $is_ajax) ))->create();
+			return ErrorHandlerFactory::make($this->createRequest(), false, $is_ajax);
 
 		}
 

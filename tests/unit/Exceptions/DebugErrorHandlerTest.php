@@ -9,13 +9,30 @@
 	use Exception;
 	use PHPUnit\Framework\TestCase;
 	use Tests\AssertsResponse;
-	use WPEmerge\Contracts\ErrorHandlerInterface;
-	use WPEmerge\Contracts\ResponseInterface;
+	use Tests\TestRequest;
+	use WPEmerge\Application\ApplicationEvent;
+	use WPEmerge\Exceptions\DebugErrorHandler;
 	use WPEmerge\Factories\ErrorHandlerFactory;
 
 	class DebugErrorHandlerTest extends TestCase {
 
 		use AssertsResponse;
+
+		protected function setUp() : void {
+
+			parent::setUp();
+			ApplicationEvent::make();
+			ApplicationEvent::fake();
+
+		}
+
+		protected function tearDown() : void {
+
+			parent::tearDown();
+
+			ApplicationEvent::setInstance(null );
+
+		}
 
 		/** @test */
 		public function exceptions_are_rendered_with_whoops () {
@@ -23,45 +40,52 @@
 
 			$handler = $this->newErrorHandler();
 
-			$handler->writeToOutput(false);
-
 			$exception = new Exception('Whoops Exception');
 
-			$response = $handler->transformToResponse( $this->createRequest(), $exception );
+			ob_start();
+			$handler->transformToResponse( $this->createRequest(), $exception );
+			$output = ob_get_clean();
 
-			$this->assertInstanceOf(ResponseInterface::class, $response);
-			$this->assertOutput('Whoops Exception', $response);
-			$this->assertStatusCode(500, $response);
-			$this->assertContentType('text/html', $response);
+			$this->assertStringContainsString('Whoops Exception', $output);
 
 
 		}
+
 
 		/** @test */
 		public function debug_data_is_provided_in_the_json_response_for_ajax_request () {
 
 			$handler = $this->newErrorHandler(TRUE);
-			$handler->writeToOutput(false);
+
 
 			$exception = new Exception('Whoops Ajax Exception');
 
-			$response = $handler->transformToResponse( $this->createRequest(), $exception );
+			ob_start();
+			$handler->transformToResponse( $this->createRequest(), $exception );
+			$response = ob_get_clean();
 
-
-			$output = json_decode( $response->body(), true )['error'];
+			$output = json_decode( $response, true )['error'];
 			$this->assertSame( 'Exception', $output['type'] );
 			$this->assertSame( 'Whoops Ajax Exception', $output['message'] );
 			$this->assertArrayHasKey( 'code', $output );
 			$this->assertArrayHasKey( 'trace', $output );
 			$this->assertArrayHasKey( 'file', $output );
 			$this->assertArrayHasKey( 'line', $output );
+			$this->assertArrayHasKey( 'trace', $output );
 
 		}
 
 
-		private function newErrorHandler (bool $is_ajax = false ) : ErrorHandlerInterface {
+		private function newErrorHandler (bool $is_ajax = false ) : DebugErrorHandler {
 
-			return (( new ErrorHandlerFactory(true, $is_ajax) ))->create();
+			$request = TestRequest::from('GET', 'foo');
+			$request->overrideGlobals();
+
+			return ErrorHandlerFactory::make(
+				$request,
+				true,
+				$is_ajax
+			);
 
 		}
 

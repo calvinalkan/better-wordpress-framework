@@ -31,7 +31,7 @@
 		 *
 		 * @return ResponseInterface
 		 */
-		public function transformToResponse( RequestInterface $request, \Throwable $exception ) :ResponseInterface;
+		public function transformToResponse( RequestInterface $request, \Throwable $exception ) :?ResponseInterface;
 
 
 

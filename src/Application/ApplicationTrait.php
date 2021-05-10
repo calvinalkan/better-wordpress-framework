@@ -69,6 +69,7 @@
 		 */
 		public static function __callStatic( string $method, array $parameters ) {
 
+
 			$application = static::getApplication();
 			$callable    = [ $application, $method ];
 

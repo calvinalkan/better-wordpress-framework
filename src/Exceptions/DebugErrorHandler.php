@@ -16,12 +16,10 @@
 
 	class DebugErrorHandler implements ErrorHandlerInterface {
 
-
 		/** @var \Whoops\RunInterface */
 		private $whoops;
 
 		private $registered = false;
-
 
 		public function __construct( RunInterface $whoops) {
 
@@ -72,6 +70,8 @@
 
 		public function handleError( $errno, $errstr, $errfile, $errline ) {
 
+			$foo = 'bar';
+
 			if ( error_reporting() ) {
 
 				$this->handleException(
@@ -83,9 +83,11 @@
 
 		}
 
-		public function transformToResponse( RequestInterface $request, Throwable $exception ) : ResponseInterface {
+		public function transformToResponse( RequestInterface $request, Throwable $exception ) : ?ResponseInterface {
 
 			 $this->handleException( $exception);
+
+			 return null;
 
 		}
 

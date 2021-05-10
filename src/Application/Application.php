@@ -71,7 +71,7 @@
 
 			}
 
-			$this->bindConfig( $config );
+			$this->bindConfigInstance( $config );
 
 			$error_handler = $this->createErrorHandler(
 				$this->config->get( 'exceptions.editor', 'phpstorm' )
@@ -94,7 +94,7 @@
 
 		}
 
-		private function bindConfig( array $config ) {
+		private function bindConfigInstance( array $config ) {
 
 			$config = new ApplicationConfig( $config );
 
@@ -118,7 +118,7 @@
 
 			$error_handler = ErrorHandlerFactory::make(
 				$request,
-				WP_DEBUG,
+				$this->config->get('debug', false ),
 				$request->isAjax(),
 				$editor
 			);

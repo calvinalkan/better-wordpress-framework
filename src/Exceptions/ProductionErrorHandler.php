@@ -39,7 +39,7 @@
 
 		}
 
-		protected function defaultResponse(RequestInterface $request) : ResponseInterface {
+		private function defaultResponse(RequestInterface $request) : ResponseInterface {
 
 			return (new Response( 'Internal Server Error', 500))
 				->setType($this->contentType($request));
