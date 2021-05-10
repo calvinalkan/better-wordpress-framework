@@ -10,6 +10,7 @@
 	use Whoops\Handler\JsonResponseHandler;
 	use Whoops\Handler\PrettyPageHandler;
 	use Whoops\Run;
+	use Whoops\RunInterface;
 	use WPEmerge\Exceptions\ConfigurationException;
 	use WPEmerge\Exceptions\DebugErrorHandler;
 	use WPEmerge\Exceptions\ProductionErrorHandler;
@@ -40,8 +41,12 @@
 			}
 
 			$whoops = new Run();
+
 			$pretty_page_handler = new PrettyPageHandler();
 			$pretty_page_handler->handleUnconditionally(true);
+
+			$container->instance(RunInterface::class, $whoops);
+			$container->instance(PrettyPageHandler::class, $pretty_page_handler);
 
 
 			if ( $is_ajax_request ) {

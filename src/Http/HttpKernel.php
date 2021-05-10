@@ -11,7 +11,6 @@
 	use Throwable;
 	use WPEmerge\Contracts\ResponsableInterface;
 	use WPEmerge\Contracts\ErrorHandlerInterface as ErrorHandler;
-	use WPEmerge\Events\UnrecoverableExceptionHandled;
 	use WPEmerge\Events\HeadersSent;
 	use WPEmerge\Events\IncomingAdminRequest;
 	use WPEmerge\Events\IncomingRequest;
@@ -83,7 +82,6 @@
 			catch ( Throwable $exception ) {
 
 				$this->response = $this->error_handler->transformToResponse( $exception );
-
 
 			}
 

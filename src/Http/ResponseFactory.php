@@ -8,7 +8,7 @@
 
 	use WPEmerge\Contracts\ResponseFactoryInterface;
 	use WPEmerge\Contracts\ResponseInterface;
-	use WPEmerge\Contracts\ViewServiceInterface;
+	use WPEmerge\Contracts\ViewServiceInterface as ViewService;
 
 	class ResponseFactory implements ResponseFactoryInterface {
 
@@ -17,7 +17,7 @@
 		 */
 		private $view;
 
-		public function __construct(ViewServiceInterface $view ) {
+		public function __construct( ViewService $view ) {
 
 			$this->view = $view;
 

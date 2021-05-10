@@ -117,7 +117,7 @@
 
 		}
 
-		public function attributes( string $key = '', $default = null ) {
+		public function attribute( string $key = '', $default = null ) {
 
 			return $this->attributes->get($key, $default);
 

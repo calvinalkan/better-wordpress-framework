@@ -7,10 +7,10 @@
 	namespace WPEmerge\Exceptions;
 
 	use Contracts\ContainerAdapter;
+	use WPEmerge\Contracts\RequestInterface;
 	use WPEmerge\Contracts\ResponseInterface;
 	use Throwable;
 	use WPEmerge\Contracts\ErrorHandlerInterface;
-	use WPEmerge\Contracts\RequestInterface;
 	use WPEmerge\Events\UnrecoverableExceptionHandled;
 	use WPEmerge\Http\Request;
 	use WPEmerge\Http\Response;
@@ -36,13 +36,21 @@
 			$this->container = $container;
 		}
 
-		public function handleException ( $exception, $in_routing_flow = false ) {
+		public function handleException ( $exception, $in_routing_flow = false, RequestInterface $request = null ) {
 
-			$response = $this->determineResponse($exception);
+			$request = $request ?? $this->container->make(RequestInterface::class);
+
+			$response = $this->determineResponse($exception, $request );
 
 			if ( $in_routing_flow ) {
 
 				return $response;
+
+			}
+
+			if ( $request ) {
+
+				$response->prepareForSending($request);
 
 			}
 
@@ -54,10 +62,9 @@
 
 		}
 
-		public function transformToResponse( Throwable $exception ) : ResponseInterface {
+		public function transformToResponse( Throwable $exception, RequestInterface $request = null ) : ResponseInterface {
 
-			return $this->handleException( $exception, true );
-
+			return $this->handleException( $exception, true, $request );
 
 		}
 
@@ -74,15 +81,15 @@
 
 		}
 
-		private function determineResponse (Throwable $e) : ResponseInterface {
+		private function determineResponse (Throwable $e, RequestInterface $request ) : ResponseInterface {
+
 
 			if ( method_exists($e, 'render') ) {
 
 				/** @var ResponseInterface $response */
-				$response = $e->render();
+				$response = $this->container->call([$e, 'render'], ['request' => $request] );
 
 				return $response->setType($this->contentType());
-
 
 			}
 

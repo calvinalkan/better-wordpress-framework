@@ -30,7 +30,7 @@
 		 *
 		 * @return ResponseInterface
 		 */
-		public function transformToResponse( \Throwable $exception ) :?ResponseInterface;
+		public function transformToResponse( \Throwable $exception, ?RequestInterface $request = null ) :?ResponseInterface;
 
 
 

@@ -10,16 +10,26 @@
 	use SniccoAdapter\BaseContainerAdapter;
 	use Tests\AssertsResponse;
 	use Tests\stubs\TestException;
+	use Tests\stubs\TestViewService;
 	use WPEmerge\Application\ApplicationEvent;
+	use WPEmerge\Contracts\RequestInterface;
 	use WPEmerge\Contracts\ResponseInterface;
+	use WPEmerge\Contracts\ViewServiceInterface;
 	use WPEmerge\Events\UnrecoverableExceptionHandled;
 	use WPEmerge\Exceptions\ProductionErrorHandler;
 	use WPEmerge\Factories\ErrorHandlerFactory;
+	use WPEmerge\Http\Request;
 	use WPEmerge\Http\Response;
+	use WPEmerge\Http\ResponseFactory;
 
 	class ProductionErrorHandlerTest extends TestCase {
 
 		use AssertsResponse;
+
+		/**
+		 * @var \SniccoAdapter\BaseContainerAdapter
+		 */
+		private $container;
 
 		protected function setUp() : void {
 
@@ -27,6 +37,9 @@
 
 			ApplicationEvent::make();
 			ApplicationEvent::fake();
+
+			$this->container = new BaseContainerAdapter();
+			$this->container->instance(RequestInterface::class, $this->createRequest());
 
 		}
 
@@ -36,8 +49,9 @@
 
 			ApplicationEvent::setInstance(null);
 
-		}
+			unset($this->container);
 
+		}
 
 
 		/** @test */
@@ -45,7 +59,7 @@
 
 
 			$handler = $this->newErrorHandler();
-			$handler->transformToResponse(new TestException('Sensitive Info') );
+			$handler->transformToResponse(new TestException('Sensitive Info'), $this->createRequest() );
 
 			ApplicationEvent::assertNotDispatched(UnrecoverableExceptionHandled::class);
 
@@ -105,7 +119,7 @@
 
 			$handler = $this->newErrorHandler();
 
-			$response = $handler->transformToResponse( new ReportTableException() );
+			$response = $handler->transformToResponse( new ReportTableException(), $this->createRequest() );
 
 			$this->assertInstanceOf(ResponseInterface::class, $response);
 			$this->assertStatusCode(500, $response);
@@ -114,10 +128,30 @@
 
 		}
 
+		/** @test */
+		public function reportable_exceptions_receive_the_current_request_and_a_response_factory_instance () {
+
+			$this->container->instance(ViewServiceInterface::class, new TestViewService());
+
+			$handler = $this->newErrorHandler();
+
+			$request = $this->createRequest();
+			$request->attributes->set('message', 'foobar');
+
+			$response = $handler->transformToResponse( new ExceptionWithDependencyInjection(), $request );
+
+			$this->assertInstanceOf(ResponseInterface::class, $response);
+			$this->assertStatusCode(500, $response);
+			$this->assertContentType('text/html', $response);
+			$this->assertOutput('foobar', $response);
+
+
+		}
+
 
 		private function newErrorHandler (bool $is_ajax = false ) : ProductionErrorHandler {
 
-			return ErrorHandlerFactory::make(new BaseContainerAdapter(), false, $is_ajax);
+			return ErrorHandlerFactory::make($this->container, false, $is_ajax);
 
 		}
 
@@ -128,6 +162,16 @@
 
 		public function render () {
 			return new Response('Foo', 500);
+		}
+
+	}
+
+	class ExceptionWithDependencyInjection  extends \Exception {
+
+		public function render( RequestInterface $request, ResponseFactory $response ) {
+
+			return new Response($request->attribute('message', ''), 500);
+
 		}
 
 	}
