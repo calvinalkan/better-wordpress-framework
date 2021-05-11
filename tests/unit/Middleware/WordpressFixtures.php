@@ -10,7 +10,7 @@
 
 	trait WordpressFixtures {
 
-		private function newAdmin() {
+		private function newAdmin( )  {
 
 			return self::factory()->user->create( [
 				'role' => 'administrator',
@@ -19,7 +19,7 @@
 
 		}
 
-		private function newAuthor() {
+		private function newAuthor()  {
 
 			return self::factory()->user->create( [
 				'role' => 'author',
