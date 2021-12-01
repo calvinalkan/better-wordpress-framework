@@ -11,7 +11,8 @@
   ],
   "require": {
     "php": "^7.3",
-    "sniccowp/better-wp-mail": "dev-master"
+    "sniccowp/better-wp-mail": "dev-master",
+    "sniccowp/core": "dev-master"
   },
   "autoload": {
     "psr-4": {
