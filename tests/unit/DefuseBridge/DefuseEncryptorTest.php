@@ -6,7 +6,7 @@ namespace Tests\unit\DefuseBridge;
 
 use Tests\UnitTest;
 use Snicco\Shared\Encryptor;
-use Snicco\DefuseBridge\DefuseEncryptor;
+use Snicco\DefuseEncryption\DefuseEncryptor;
 use Defuse\Crypto\Exception\BadFormatException;
 
 class DefuseEncryptorTest extends UnitTest

@@ -11,8 +11,9 @@ return static function (ContainerConfigurator $containerConfigurator) :void {
     //for "merge" command
     $parameters->set(Option::DATA_TO_APPEND, [
         ComposerJsonSection::REQUIRE_DEV => [
-            'lucatume/wp-browser' => '3.0.6',
+            'lucatume/wp-browser' => '^3.0.0',
             'phpunit/phpunit' => '^9.5',
+            'mockery/mockery' => '^1.4.2',
         ],
     ]);
 };

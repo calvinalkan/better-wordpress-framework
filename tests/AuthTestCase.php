@@ -7,15 +7,14 @@ namespace Tests;
 use WP_User;
 use Snicco\Shared\Encryptor;
 use Snicco\Auth\RecoveryCode;
-use Snicco\Support\Collection;
 use Snicco\Session\SessionManager;
 use Snicco\Auth\AuthSessionManager;
 use Snicco\Auth\AuthServiceProvider;
-use Snicco\Session\IlluminateEncryptor;
 use Snicco\Session\SessionServiceProvider;
 use Snicco\Session\Contracts\SessionDriver;
 use Snicco\Validation\ValidationServiceProvider;
 use Snicco\Session\Contracts\SessionManagerInterface;
+use Snicco\DefuseEncryption\DefuseEncryptionServiceProvider;
 
 class AuthTestCase extends FrameworkTestCase
 {
@@ -36,6 +35,7 @@ class AuthTestCase extends FrameworkTestCase
             ValidationServiceProvider::class,
             SessionServiceProvider::class,
             AuthServiceProvider::class,
+            DefuseEncryptionServiceProvider::class,
         ];
     }
     

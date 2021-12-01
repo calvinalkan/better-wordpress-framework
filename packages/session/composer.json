@@ -1,6 +1,6 @@
 {
-  "name": "sniccowp/eloquent-bundle",
-  "description": "Integrates sniccowp/eloquent with the sniccowp/core package.",
+  "name": "sniccowp/session",
+  "description": "Provides a custom session implementation that is save to use in distributed WordPress code.",
   "minimum-stability": "stable",
   "license": "GPL-3.0-only",
   "authors": [
@@ -11,15 +11,11 @@
   ],
   "require": {
     "php": "^7.3",
-    "sniccowp/eloquent": "dev-master",
     "sniccowp/core": "dev-master"
-  },
-  "require-dev": {
-    "fakerphp/faker": "^1.0.0-stable"
   },
   "autoload": {
     "psr-4": {
-      "Snicco\\EloquentBundle\\": "src"
+      "Snicco\\Session\\": "src"
     }
   }
 }
