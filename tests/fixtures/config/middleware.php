@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Tests\unit\Routing\Foo;
+use Tests\unit\core\Routing\Foo;
 
 return [
     
