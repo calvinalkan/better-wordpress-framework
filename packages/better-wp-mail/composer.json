@@ -1,0 +1,23 @@
+{
+  "name": "sniccowp/better-wp-mail",
+  "description": "Keep your sanity while working with mails in WordPress",
+  "minimum-stability": "stable",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Calvin Alkan",
+      "email": "calvin@snicco.de"
+    }
+  ],
+  "require": {
+    "php": "^7.3"
+  },
+  "require-dev": {
+    "lucatume/wp-browser": "^3.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Snicco\\Mail\\": "src"
+    }
+  }
+}

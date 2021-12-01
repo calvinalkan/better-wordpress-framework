@@ -9,9 +9,9 @@ use Snicco\Database\MysqliConnection;
 use Snicco\Testing\WithDatabaseExceptions;
 use Snicco\Core\Database\DatabaseServiceProvider;
 use Snicco\Database\Contracts\MysqliDriverInterface;
-use Tests\integration\Database\Concerns\AssertableWpDB;
-use Tests\integration\Database\Concerns\WithTestTables;
-use Tests\integration\Database\Concerns\WithTestTransactions;
+use Tests\integration\database\Concerns\AssertableWpDB;
+use Tests\integration\database\Concerns\WithTestTables;
+use Tests\integration\database\Concerns\WithTestTransactions;
 
 use function class_uses_recursive;
 

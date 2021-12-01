@@ -37,11 +37,11 @@ if ( ! defined('TESTS_CONFIG_PATH')) {
 }
 
 if ( ! defined('BLADE_CACHE')) {
-    define('BLADE_CACHE', TESTS_DIR.DS.'integration'.DS.'Blade'.DS.'cache');
+    define('BLADE_CACHE', TESTS_DIR.DS.'integration'.DS.'blade'.DS.'fixtures'.DS.'cache');
 }
 
 if ( ! defined('BLADE_VIEWS')) {
-    define('BLADE_VIEWS', TESTS_DIR.DS.'integration'.DS.'Blade'.DS.'views');
+    define('BLADE_VIEWS', TESTS_DIR.DS.'integration'.DS.'blade'.DS.'fixtures'.DS.'views');
 }
 
 if ( ! defined('ROUTES_DIR')) {

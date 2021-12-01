@@ -10,11 +10,11 @@ use Illuminate\Container\Container;
 use Snicco\Database\MysqliConnection;
 use Illuminate\Database\Eloquent\Model;
 use Snicco\Database\WPConnectionResolver;
-use Tests\fixtures\database\Models\Country;
 use Illuminate\Database\ConnectionInterface;
 use Snicco\EventDispatcher\Contracts\Dispatcher;
 use Snicco\Core\Database\DatabaseServiceProvider;
 use Illuminate\Database\ConnectionResolverInterface;
+use Tests\integration\database\fixtures\Models\Country;
 use Illuminate\Contracts\Events\Dispatcher as IlluminateDispatcher;
 
 class DatabaseServiceProviderTest extends FrameworkTestCase

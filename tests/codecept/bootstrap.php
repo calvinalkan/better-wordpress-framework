@@ -36,43 +36,16 @@ if ( ! defined('ROUTES_DIR')) {
     define('ROUTES_DIR', FIXTURES_DIR.DS.'routes');
 }
 
-if ( ! defined('BLADE_VIEWS')) {
-    define('BLADE_VIEWS', $tests_dir.DS.'integration'.DS.'Blade'.DS.'views');
-}
-
 if ( ! defined('VIEWS_DIR')) {
     define('VIEWS_DIR', $tests_dir.DS.'fixtures'.DS.'views');
 }
-
 if ( ! defined('BLADE_CACHE')) {
-    define('BLADE_CACHE', $tests_dir.DS.'integration'.DS.'Blade'.DS.'cache');
+    define('BLADE_CACHE', TESTS_DIR.DS.'integration'.DS.'blade'.DS.'fixtures'.DS.'cache');
 }
 
-//if ( ! defined('VENDOR_DIR')) {
-//    define('VENDOR_DIR', $root_dir.DIRECTORY_SEPARATOR.'vendor');
-//}
-//
-
-//
-
-//
-//if ( ! defined('TESTS_DIR')) {
-//    define('TESTS_DIR', $root_dir.DS.'tests');
-//}
-//
-//if ( ! defined('TESTS_CONFIG_PATH')) {
-//    define('TESTS_CONFIG_PATH', $root_dir.DS.'tests'.DS.'stubs'.DS.'test-app-config.php');
-//}
-//
-
-//
-
-//
-//if ( ! defined('TEST_CONFIG')) {
-//    $config = require TESTS_CONFIG_PATH;
-//
-//    define('TEST_CONFIG', $config);
-//}
+if ( ! defined('BLADE_VIEWS')) {
+    define('BLADE_VIEWS', TESTS_DIR.DS.'integration'.DS.'blade'.DS.'fixtures'.DS.'views');
+}
 
 require $root_dir.DS.'vendor'.DS.'autoload.php';
 
