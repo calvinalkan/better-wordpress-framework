@@ -12,7 +12,6 @@ use Snicco\View\ViewComposerCollection;
 use Snicco\View\Implementations\PHPViewFactory;
 
 use const DS;
-use const ROOT_DIR;
 
 class ViewServiceProviderTest extends FrameworkTestCase
 {
@@ -67,7 +66,7 @@ class ViewServiceProviderTest extends FrameworkTestCase
     {
         $views = $this->app->config('view.paths');
         
-        $this->assertSame(ROOT_DIR.DS.'resources'.DS.'views', end($views));
+        $this->assertSame(CORE_DIR.DS.'resources'.DS.'views', end($views));
     }
     
 }

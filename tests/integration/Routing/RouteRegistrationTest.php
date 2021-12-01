@@ -9,8 +9,8 @@ use Snicco\Support\Arr;
 use Tests\stubs\TestApp;
 use Tests\FrameworkTestCase;
 use Snicco\Contracts\ServiceProvider;
-use Snicco\Core\Events\EventObjects\IncomingAjaxRequest;
-use Snicco\Core\Events\EventObjects\IncomingAdminRequest;
+use Snicco\EventDispatcher\Events\IncomingAjaxRequest;
+use Snicco\EventDispatcher\Events\IncomingAdminRequest;
 
 class RouteRegistrationTest extends FrameworkTestCase
 {

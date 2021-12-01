@@ -7,7 +7,7 @@ use Tests\FrameworkTestCase;
 use Snicco\Http\Psr7\Response;
 use Snicco\Http\ResponseEmitter;
 use Snicco\Http\ResponsePreparation;
-use Snicco\Core\Events\EventObjects\AdminInit;
+use Snicco\EventDispatcher\Events\AdminInit;
 
 class AdminRoutesTest extends FrameworkTestCase
 {

@@ -10,10 +10,8 @@
     }
   ],
   "require": {
-    "php": "^7.3"
-  },
-  "require-dev": {
-    "lucatume/wp-browser": "^3.0.0"
+    "php": "^7.3",
+    "sniccowp/better-wp-mail": "dev-master"
   },
   "autoload": {
     "psr-4": {

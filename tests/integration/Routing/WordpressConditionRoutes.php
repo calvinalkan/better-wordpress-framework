@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\integration\Routing;
 
-use Snicco\Events\Event;
 use Tests\FrameworkTestCase;
+use Snicco\EventDispatcher\Event;
 use Tests\fixtures\Middleware\WebMiddleware;
-use Snicco\Core\Events\EventObjects\ResponseSent;
+use Snicco\EventDispatcher\Events\ResponseSent;
 
 class WordpressConditionRoutes extends FrameworkTestCase
 {

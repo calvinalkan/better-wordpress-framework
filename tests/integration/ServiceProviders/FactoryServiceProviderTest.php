@@ -10,7 +10,7 @@ use Snicco\Routing\ControllerAction;
 use Snicco\Factories\RouteActionFactory;
 use Snicco\Factories\RouteConditionFactory;
 use Tests\fixtures\ViewComposers\FooComposer;
-use Snicco\Core\View\DependencyInjectionViewComposerFactory;
+use Snicco\ViewBundle\DependencyInjectionViewComposerFactory;
 
 class FactoryServiceProviderTest extends FrameworkTestCase
 {

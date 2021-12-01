@@ -83,7 +83,7 @@ class ApplicationServiceProviderTest extends FrameworkTestCase
     {
         $this->bootApp();
         
-        $this->assertSame(ROOT_DIR, TestApp::config('app.package_root'));
+        $this->assertSame(CORE_DIR, TestApp::config('app.package_root'));
     }
     
     /** @test */

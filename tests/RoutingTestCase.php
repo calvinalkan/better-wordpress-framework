@@ -13,14 +13,14 @@ use Snicco\Http\HttpKernel;
 use Snicco\View\ViewEngine;
 use Snicco\Routing\Pipeline;
 use Tests\stubs\HeaderStack;
+use Snicco\Http\MethodField;
 use Snicco\Http\Psr7\Request;
 use PHPUnit\Framework\TestCase;
-use Snicco\Shared\ContainerAdapter;
 use Snicco\Contracts\MagicLink;
 use Snicco\Http\ResponseFactory;
 use Snicco\Http\ResponseEmitter;
 use Snicco\Contracts\Middleware;
-use Snicco\Core\Http\MethodField;
+use Snicco\Shared\ContainerAdapter;
 use Tests\concerns\CreateContainer;
 use Tests\concerns\CreatePsrRequests;
 use Tests\concerns\CreateRouteMatcher;
@@ -53,7 +53,7 @@ use Snicco\Routing\FastRoute\FastRouteUrlGenerator;
 use Snicco\EventDispatcher\Dispatcher\FakeDispatcher;
 use Snicco\EventDispatcher\Dispatcher\EventDispatcher;
 use Tests\fixtures\Conditions\ConditionWithDependency;
-use Snicco\Core\Events\DependencyInversionListenerFactory;
+use Snicco\EventDispatcher\DependencyInversionListenerFactory;
 
 class RoutingTestCase extends TestCase
 {

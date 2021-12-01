@@ -1,0 +1,24 @@
+{
+  "name": "sniccowp/core",
+  "description": "The core of the sniccowp framework",
+  "minimum-stability": "stable",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Calvin Alkan",
+      "email": "calvin@snicco.de"
+    }
+  ],
+  "require": {
+    "php": "^7.3",
+    "sniccowp/better-wp-hooks": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "Snicco\\": "src"
+    },
+    "files": [
+      "src/Support/functions.php"
+    ]
+  }
+}

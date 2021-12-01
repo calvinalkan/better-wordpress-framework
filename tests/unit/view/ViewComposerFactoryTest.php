@@ -10,7 +10,7 @@ use Tests\concerns\CreateContainer;
 use Snicco\View\Contracts\ViewComposer;
 use Snicco\View\Contracts\ViewInterface;
 use Tests\fixtures\ViewComposers\FooComposer;
-use Snicco\Core\View\DependencyInjectionViewComposerFactory;
+use Snicco\ViewBundle\DependencyInjectionViewComposerFactory;
 
 use const TEST_CONFIG;
 

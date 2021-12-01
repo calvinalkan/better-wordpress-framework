@@ -11,7 +11,7 @@ use Snicco\View\GlobalViewContext;
 use Snicco\View\ViewComposerCollection;
 use Snicco\View\Contracts\ViewComposer;
 use Snicco\View\Contracts\ViewInterface;
-use Snicco\Core\View\DependencyInjectionViewComposerFactory;
+use Snicco\ViewBundle\DependencyInjectionViewComposerFactory;
 use Snicco\View\Implementations\NewableInstanceViewComposerFactory;
 
 class ViewComposerCollectionTest extends UnitTest

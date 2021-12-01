@@ -9,8 +9,8 @@ use Mockery;
 use Tests\RoutingTestCase;
 use Tests\stubs\TestRequest;
 use Snicco\Http\Psr7\Request;
-use Snicco\Listeners\FilterWpQuery;
-use Snicco\Core\Events\EventObjects\WPQueryFilterable;
+use Snicco\EventDispatcher\Listeners\FilterWpQuery;
+use Snicco\EventDispatcher\Events\WPQueryFilterable;
 
 class RouteCachingTest extends RoutingTestCase
 {

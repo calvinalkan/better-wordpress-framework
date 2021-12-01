@@ -16,6 +16,10 @@ if ( ! defined('ROOT_DIR')) {
     define('ROOT_DIR', $root_dir);
 }
 
+if ( ! defined('CORE_DIR')) {
+    define('CORE_DIR', $root_dir.'/packages/core');
+}
+
 if ( ! defined('TESTS_DIR')) {
     define('TESTS_DIR', $root_dir.DS.'tests');
 }

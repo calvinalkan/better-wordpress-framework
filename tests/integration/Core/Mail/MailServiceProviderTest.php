@@ -13,7 +13,7 @@ use Snicco\Mail\Mailer\WordPressMailer;
 use Snicco\Mail\ValueObjects\MailDefaults;
 use Snicco\Mail\Contracts\MailEventDispatcher;
 use Snicco\Mail\Contracts\MailBuilderInterface;
-use Snicco\Core\Mail\FrameworkMailEventDispatcher;
+use Snicco\MailBundle\FrameworkMailEventDispatcher;
 
 class MailServiceProviderTest extends FrameworkTestCase
 {

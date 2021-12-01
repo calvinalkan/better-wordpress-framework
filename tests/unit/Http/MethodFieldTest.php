@@ -7,7 +7,7 @@ namespace Tests\unit\Http;
 use LogicException;
 use Tests\UnitTest;
 use Snicco\Support\Str;
-use Snicco\Core\Http\MethodField;
+use Snicco\Http\MethodField;
 
 use const TEST_APP_KEY;
 

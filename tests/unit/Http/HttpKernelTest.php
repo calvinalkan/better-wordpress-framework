@@ -12,7 +12,7 @@ use Snicco\Http\ResponseFactory;
 use Snicco\Contracts\Middleware;
 use Psr\Http\Message\ResponseInterface;
 use Snicco\Http\Responses\RedirectResponse;
-use Snicco\Core\Events\EventObjects\ResponseSent;
+use Snicco\EventDispatcher\Events\ResponseSent;
 use Snicco\Middleware\Core\EvaluateResponseMiddleware;
 use Snicco\ExceptionHandling\Exceptions\NotFoundException;
 

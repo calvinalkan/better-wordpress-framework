@@ -8,12 +8,11 @@ use Tests\stubs\TestApp;
 use Snicco\Routing\Router;
 use Tests\FrameworkTestCase;
 use Snicco\Routing\UrlGenerator;
-use Snicco\Routing\RouteFileRegistrar;
+use Snicco\Contracts\RouteRegistrar;
 use Snicco\Contracts\RouteUrlMatcher;
 use Snicco\Contracts\RouteUrlGenerator;
-use Snicco\Routing\CachedRouteFileRegistrar;
 use Snicco\Factories\RouteConditionFactory;
-use Snicco\Contracts\RouteRegistrar;
+use Snicco\Routing\CachedRouteFileRegistrar;
 use Snicco\Routing\FastRoute\FastRouteUrlMatcher;
 use Snicco\Routing\FastRoute\FastRouteUrlGenerator;
 
@@ -204,7 +203,7 @@ class RoutingServiceProviderTest extends FrameworkTestCase
         
         $routes = TestApp::config('routing.definitions');
         
-        $this->assertSame(ROOT_DIR.DS.'routes', end($routes));
+        $this->assertSame(CORE_DIR.DS.'routes', end($routes));
     }
     
 }

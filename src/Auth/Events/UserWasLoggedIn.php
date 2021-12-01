@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Snicco\Auth\Events;
 
 use WP_User;
-use Snicco\Core\Events\EventObjects\CoreEvent;
+use Snicco\EventDispatcher\Events\CoreEvent;
 
 class UserWasLoggedIn extends CoreEvent
 {

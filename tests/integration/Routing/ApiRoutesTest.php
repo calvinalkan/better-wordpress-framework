@@ -10,7 +10,7 @@ use Snicco\Http\Psr7\Request;
 use Snicco\Contracts\Middleware;
 use Snicco\Http\ResponseFactory;
 use Psr\Http\Message\ResponseInterface;
-use Snicco\Core\Events\EventObjects\ResponseSent;
+use Snicco\EventDispatcher\Events\ResponseSent;
 
 class ApiRoutesTest extends FrameworkTestCase
 {

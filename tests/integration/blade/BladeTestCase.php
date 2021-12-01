@@ -6,7 +6,7 @@ namespace Tests\integration\blade;
 
 use Tests\FrameworkTestCase;
 use Snicco\Session\SessionServiceProvider;
-use Snicco\Core\Blade\BladeServiceProvider;
+use Snicco\BladeBundle\BladeServiceProvider;
 
 class BladeTestCase extends FrameworkTestCase
 {

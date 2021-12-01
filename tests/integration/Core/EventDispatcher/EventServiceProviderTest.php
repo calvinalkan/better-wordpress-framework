@@ -6,12 +6,12 @@ namespace Tests\integration\Core\EventDispatcher;
 
 use Tests\FrameworkTestCase;
 use Snicco\EventDispatcher\Contracts\Dispatcher;
-use Snicco\EventDispatcher\Dispatcher\FakeDispatcher;
 use Snicco\EventDispatcher\Contracts\ListenerFactory;
+use Snicco\EventDispatcher\Dispatcher\FakeDispatcher;
 use Snicco\EventDispatcher\Dispatcher\EventDispatcher;
-use Snicco\Core\Events\DependencyInversionEventFactory;
 use Snicco\EventDispatcher\Contracts\MappedEventFactory;
-use Snicco\Core\Events\DependencyInversionListenerFactory;
+use Snicco\EventDispatcher\DependencyInversionEventFactory;
+use Snicco\EventDispatcher\DependencyInversionListenerFactory;
 
 final class EventServiceProviderTest extends FrameworkTestCase
 {

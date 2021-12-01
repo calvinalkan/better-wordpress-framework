@@ -7,7 +7,7 @@ namespace Tests\integration\Core\Database;
 use Tests\FrameworkTestCase;
 use Snicco\Database\MysqliConnection;
 use Snicco\Testing\WithDatabaseExceptions;
-use Snicco\Core\Database\DatabaseServiceProvider;
+use Snicco\EloquentBundle\DatabaseServiceProvider;
 use Snicco\Database\Contracts\MysqliDriverInterface;
 use Tests\integration\database\Concerns\AssertableWpDB;
 use Tests\integration\database\Concerns\WithTestTables;

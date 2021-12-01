@@ -10,12 +10,7 @@
     }
   ],
   "require": {
-    "php": "^7.3",
-    "codeception/module-phpbrowser": "^1.0.0",
-    "codeception/module-asserts": "^1.0.0"
-  },
-  "require-dev": {
-    "lucatume/wp-browser": "^3.0.0"
+    "php": "^7.3"
   },
   "autoload": {
     "psr-4": {

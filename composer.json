@@ -33,9 +33,7 @@
         "psr/log": "^1.0.0",
         "symfony/dependency-injection": "^5.0",
         "symfony/finder": "^5.0-stable",
-        "symfony/http-kernel": "^5.0",
-        "codeception/module-phpbrowser": "^1.0.0",
-        "codeception/module-asserts": "^1.0.0"
+        "symfony/http-kernel": "^5.0"
     },
     "require-dev": {
         "adriansuter/php-autoload-override": "^1.2",
@@ -45,7 +43,7 @@
         "fakerphp/faker": "^1.0.0-stable",
         "filp/whoops": "^2.2",
         "illuminate/container": "^8.0.0",
-        "lucatume/wp-browser": "^3.0.0",
+        "lucatume/wp-browser": "3.0.6",
         "mockery/mockery": "^1.4.2",
         "nyholm/psr7": "^1.0.0-stable",
         "opis/closure": "3.6.2",
@@ -69,34 +67,38 @@
     "autoload": {
         "files": [
             "packages/better-wp-hooks/src/functions.php",
-            "src/Support/functions.php"
+            "packages/core/src/Support/functions.php"
         ],
         "psr-4": {
-            "Snicco\\": "src/",
+            "Snicco\\": "packages/core/src",
+            "Snicco\\BladeBundle\\": "packages/blade-bundle/src",
             "Snicco\\Blade\\": "packages/blade/src",
             "Snicco\\Database\\": "packages/eloquent/src",
+            "Snicco\\EloquentBundle\\": "packages/eloquent-bundle/src",
             "Snicco\\EventDispatcher\\": "packages/better-wp-hooks/src",
+            "Snicco\\MailBundle\\": "packages/better-wp-mail-bundle/src",
             "Snicco\\Mail\\": "packages/better-wp-mail/src",
+            "Snicco\\ViewBundle\\": "packages/view-bundle/src",
             "Snicco\\View\\": "packages/view/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Snicco\\": "src/",
-            "Tests\\": "tests/",
-            "Tests\\Blade\\": "packages/blade/tests",
-            "Tests\\Database\\": "packages/eloquent/tests",
-            "Tests\\EventDispatcher\\": "packages/better-wp-hooks/tests",
-            "Tests\\Mail\\": "packages/better-wp-mail/tests",
-            "Tests\\View\\": "packages/view/tests"
+            "Tests\\": "tests/"
         }
     },
     "replace": {
         "sniccowp/better-wp-hooks": "self.version",
         "sniccowp/better-wp-mail": "self.version",
+        "sniccowp/better-wp-mail-bundle": "self.version",
         "sniccowp/blade": "self.version",
+        "sniccowp/blade-bundle": "self.version",
+        "sniccowp/core": "self.version",
         "sniccowp/eloquent": "self.version",
-        "sniccowp/view": "self.version"
+        "sniccowp/eloquent-bundle": "self.version",
+        "sniccowp/view": "self.version",
+        "sniccowp/view-bundle": "self.version"
     },
     "minimum-stability": "stable",
     "prefer-stable": true
