@@ -43,8 +43,7 @@
     "adriansuter/php-autoload-override": "^1.2",
     "fakerphp/faker": "^1.0.0-stable",
     "filp/whoops": "^2.2",
-    "nyholm/psr7-server": "^1.0-stable",
-    "symplify/monorepo-builder": "^9.4"
+    "nyholm/psr7-server": "^1.0-stable"
   },
   "autoload": {
     "files": [

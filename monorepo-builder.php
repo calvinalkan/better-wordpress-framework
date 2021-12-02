@@ -14,6 +14,7 @@ return static function (ContainerConfigurator $containerConfigurator) :void {
             'lucatume/wp-browser' => '^3.0.0',
             'phpunit/phpunit' => '^9.5',
             'mockery/mockery' => '^1.4.2',
+            'symplify/monorepo-builder' => '^9.4',
         ],
     ]);
 };
