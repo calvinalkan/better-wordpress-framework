@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\integration\view;
+namespace Tests\View\integration;
 
 use Snicco\View\ViewEngine;
 use Snicco\View\GlobalViewContext;
@@ -16,7 +16,7 @@ use Snicco\View\Exceptions\ViewNotFoundException;
 use Snicco\View\Exceptions\ViewRenderingException;
 use Snicco\View\Implementations\NewableInstanceViewComposerFactory;
 
-use const VIEWS_DIR;
+use const VIEW_TEST_DIR;
 
 class ViewEngineTest extends WPTestCase
 {
@@ -36,9 +36,16 @@ class ViewEngineTest extends WPTestCase
      */
     private $composers;
     
+    /**
+     * @var string
+     */
+    private $view_dir;
+    
     protected function setUp() :void
     {
         parent::setUp();
+        
+        $this->view_dir = VIEW_TEST_DIR.DS.'fixtures'.DS.'views';
         
         $this->global_view_context = new GlobalViewContext();
         $this->composers = new ViewComposerCollection(
@@ -47,7 +54,7 @@ class ViewEngineTest extends WPTestCase
         );
         $this->view_engine = new ViewEngine(
             new PHPViewFactory(
-                new PHPViewFinder([VIEWS_DIR]),
+                new PHPViewFinder([$this->view_dir]),
                 $this->composers
             )
         );
@@ -57,8 +64,8 @@ class ViewEngineTest extends WPTestCase
     {
         parent::tearDown();
         
-        if (is_file(VIEWS_DIR.'/framework/redirect-protection.php')) {
-            unlink(VIEWS_DIR.'/framework/redirect-protection.php');
+        if (is_file($this->view_dir.'/framework/redirect-protection.php')) {
+            unlink($this->view_dir.'/framework/redirect-protection.php');
         }
     }
     
@@ -226,7 +233,7 @@ class ViewEngineTest extends WPTestCase
     public function views_in_the_application_with_the_same_path_as_the_framework_have_priority_over_framework_views()
     {
         file_put_contents(
-            VIEWS_DIR.'/framework/redirect-protection.php',
+            $this->view_dir.'/framework/redirect-protection.php',
             "<?php echo 'Redirecting';"
         );
         

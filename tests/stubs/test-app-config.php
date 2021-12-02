@@ -16,7 +16,7 @@ return [
     
     'composers' => [
         
-        'Tests\fixtures\ViewComposers',
+        'Tests\View\fixtures\ViewComposers',
     
     ],
     

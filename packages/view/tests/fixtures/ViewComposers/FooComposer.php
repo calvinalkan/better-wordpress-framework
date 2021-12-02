@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\fixtures\ViewComposers;
+namespace Tests\View\fixtures\ViewComposers;
 
 use Snicco\View\Contracts\ViewComposer;
 use Snicco\View\Contracts\ViewInterface;

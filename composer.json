@@ -9,13 +9,15 @@
   ],
   "type": "library",
   "require": {
-    "php": "^7.3",
+    "php": "^7.4",
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-mysqli": "*",
     "akrabat/ip-address-middleware": "^2.0",
     "bacon/bacon-qr-code": "^2.0",
     "bjeavons/zxcvbn-php": "^1.0",
+    "codeception/module-asserts": "^1.0.0",
+    "codeception/module-phpbrowser": "^1.0.0",
     "defuse/php-encryption": "^2.0.0",
     "illuminate/container": "^8.0.0",
     "illuminate/database": "^v8.0.0",
@@ -43,7 +45,8 @@
     "adriansuter/php-autoload-override": "^1.2",
     "fakerphp/faker": "^1.0.0-stable",
     "filp/whoops": "^2.2",
-    "nyholm/psr7-server": "^1.0-stable"
+    "nyholm/psr7-server": "^1.0-stable",
+    "symplify/monorepo-builder": "^9.4"
   },
   "autoload": {
     "files": [
@@ -71,7 +74,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\": "tests/"
+      "Tests\\View\\": "packages/view/tests"
     }
   },
   "replace": {
@@ -91,6 +94,14 @@
     "sniccowp/validation-bundle": "self.version",
     "sniccowp/view": "self.version",
     "sniccowp/view-bundle": "self.version"
+  },
+  "scripts": {
+    "unit": "vendor/bin/codecept run -s integration",
+    "integration": "vendor/bin/codecept run -s unit",
+    "tests": [
+      "@integration",
+      "@unit"
+    ]
   },
   "minimum-stability": "stable",
   "prefer-stable": true

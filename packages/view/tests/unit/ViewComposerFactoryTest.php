@@ -2,17 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tests\unit\view;
+namespace Tests\View\unit;
 
 use Tests\UnitTest;
 use Tests\stubs\TestView;
 use Tests\concerns\CreateContainer;
 use Snicco\View\Contracts\ViewComposer;
 use Snicco\View\Contracts\ViewInterface;
-use Tests\fixtures\ViewComposers\FooComposer;
+use Tests\View\fixtures\ViewComposers\FooComposer;
 use Snicco\ViewBundle\DependencyInjectionViewComposerFactory;
-
-use const TEST_CONFIG;
 
 class ViewComposerFactoryTest extends UnitTest
 {
@@ -28,7 +26,7 @@ class ViewComposerFactoryTest extends UnitTest
         $this->factory =
             new DependencyInjectionViewComposerFactory(
                 $this->createContainer(),
-                TEST_CONFIG['composers']
+                ['Tests\View\fixtures\ViewComposers']
             );
     }
     

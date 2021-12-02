@@ -9,7 +9,7 @@ use Tests\FrameworkTestCase;
 use Snicco\Routing\ControllerAction;
 use Snicco\Factories\RouteActionFactory;
 use Snicco\Factories\RouteConditionFactory;
-use Tests\fixtures\ViewComposers\FooComposer;
+use Tests\View\fixtures\ViewComposers\FooComposer;
 use Snicco\ViewBundle\DependencyInjectionViewComposerFactory;
 
 class FactoryServiceProviderTest extends FrameworkTestCase

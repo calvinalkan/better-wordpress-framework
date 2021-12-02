@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\unit\view;
+namespace Tests\View\unit;
 
 use Tests\UnitTest;
 use Tests\stubs\TestView;

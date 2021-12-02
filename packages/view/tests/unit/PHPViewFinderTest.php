@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\unit\view;
+namespace Tests\View\unit;
 
-use Tests\UnitTest;
+use Codeception\PHPUnit\TestCase;
 use Snicco\View\Implementations\PHPViewFinder;
 
-class PHPViewFinderTest extends UnitTest
+use const VIEW_TEST_DIR;
+
+class PHPViewFinderTest extends TestCase
 {
     
     /**
@@ -15,17 +17,23 @@ class PHPViewFinderTest extends UnitTest
      */
     private $finder;
     
+    /**
+     * @var string
+     */
+    private $view_dir;
+    
     public function setUp() :void
     {
         parent::setUp();
         
-        $this->finder = new PHPViewFinder([VIEWS_DIR]);
+        $this->view_dir = VIEW_TEST_DIR.DS.'fixtures'.DS.'views';
+        $this->finder = new PHPViewFinder([$this->view_dir]);
     }
     
     /** @test */
     public function file_existence_can_be_checked()
     {
-        $this->assertTrue($this->finder->exists(VIEWS_DIR.DS.'view.php'));
+        $this->assertTrue($this->finder->exists($this->view_dir.DS.'view.php'));
         $this->assertTrue($this->finder->exists('view.php'));
         $this->assertTrue($this->finder->exists('view'));
         $this->assertFalse($this->finder->exists('nonexistent'));
@@ -43,12 +51,12 @@ class PHPViewFinderTest extends UnitTest
     public function nested_files_can_be_found_by_dot_notation()
     {
         // only direct child files
-        $finder = new PHPViewFinder([VIEWS_DIR]);
+        $finder = new PHPViewFinder([$this->view_dir]);
         $this->assertTrue($finder->exists('view.php'));
         $this->assertFalse($finder->exists('first.php'));
         
         // one child dir
-        $finder = new PHPViewFinder([VIEWS_DIR]);
+        $finder = new PHPViewFinder([$this->view_dir]);
         $this->assertTrue($finder->exists('view'));
         $this->assertTrue($finder->exists('level-one.first'));
         $this->assertTrue($finder->exists('level-one.level-two.second'));
@@ -61,7 +69,7 @@ class PHPViewFinderTest extends UnitTest
     /** @test */
     public function file_paths_can_be_retrieved()
     {
-        $expected = VIEWS_DIR.DS.'view.php';
+        $expected = $this->view_dir.DS.'view.php';
         
         $this->assertEquals($expected, $this->finder->filePath($expected));
         $this->assertEquals($expected, $this->finder->filePath('view.php'));
@@ -73,7 +81,7 @@ class PHPViewFinderTest extends UnitTest
     /** @test */
     public function absolute_file_paths_can_be_retrieved()
     {
-        $directory = VIEWS_DIR;
+        $directory = $this->view_dir;
         $file = $directory.DS.'view.php';
         
         $this->assertEquals($file, $this->finder->filePath($file));
@@ -85,11 +93,11 @@ class PHPViewFinderTest extends UnitTest
     /** @test */
     public function files_can_be_retrieved_from_custom_directories()
     {
-        $subdirectory = VIEWS_DIR.DS.'subdirectory';
-        $view = VIEWS_DIR.DS.'view.php';
+        $subdirectory = $this->view_dir.DS.'subdirectory';
+        $view = $this->view_dir.DS.'view.php';
         $subview = $subdirectory.DS.'subview.php';
         
-        $finder = new PHPViewFinder([VIEWS_DIR]);
+        $finder = new PHPViewFinder([$this->view_dir]);
         $this->assertEquals($view, $finder->filePath('/view.php'));
         $this->assertEquals($view, $finder->filePath('view.php'));
         $this->assertEquals($view, $finder->filePath('/view'));
@@ -97,7 +105,7 @@ class PHPViewFinderTest extends UnitTest
         $this->assertEquals('', $finder->filePath('/nonexistent'));
         $this->assertEquals('', $finder->filePath('nonexistent'));
         
-        $finder = new PHPViewFinder([VIEWS_DIR, $subdirectory]);
+        $finder = new PHPViewFinder([$this->view_dir, $subdirectory]);
         $this->assertEquals($view, $finder->filePath('/view.php'));
         $this->assertEquals($view, $finder->filePath('view.php'));
         $this->assertEquals($view, $finder->filePath('/view'));
