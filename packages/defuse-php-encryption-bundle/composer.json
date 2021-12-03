@@ -18,5 +18,10 @@
     "psr-4": {
       "Snicco\\DefuseEncryption\\": "src"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\DefuseEncryption\\": "tests"
+    }
   }
 }

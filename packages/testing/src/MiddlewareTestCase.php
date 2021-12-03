@@ -14,12 +14,12 @@ use Snicco\Contracts\Middleware;
 use Snicco\Routing\UrlGenerator;
 use Snicco\Http\ResponseFactory;
 use Snicco\Http\StatelessRedirector;
-use Tests\concerns\CreatePsrRequests;
 use Snicco\Contracts\RouteUrlGenerator;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Snicco\Testing\TestDoubles\TestMagicLink;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Snicco\Testing\Concerns\CreatePsrRequests;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Snicco\Testing\Assertable\MiddlewareTestResponse;
 

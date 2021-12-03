@@ -18,5 +18,10 @@
     "psr-4": {
       "Snicco\\Validation\\": "src"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Validation\\": "tests"
+    }
   }
 }

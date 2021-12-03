@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Tests\fixtures\Conditions\TrueCondition;
+use Tests\Core\fixtures\Conditions\TrueCondition;
 
 return [
     

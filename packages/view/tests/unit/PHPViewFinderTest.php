@@ -7,8 +7,6 @@ namespace Tests\View\unit;
 use Codeception\PHPUnit\TestCase;
 use Snicco\View\Implementations\PHPViewFinder;
 
-use const VIEW_TEST_DIR;
-
 class PHPViewFinderTest extends TestCase
 {
     
@@ -26,7 +24,7 @@ class PHPViewFinderTest extends TestCase
     {
         parent::setUp();
         
-        $this->view_dir = VIEW_TEST_DIR.DS.'fixtures'.DS.'views';
+        $this->view_dir = SHARED_FIXTURES_DIR.DS.'views';
         $this->finder = new PHPViewFinder([$this->view_dir]);
     }
     

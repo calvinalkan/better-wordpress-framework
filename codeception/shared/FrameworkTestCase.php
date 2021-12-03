@@ -8,7 +8,6 @@ use Snicco\Support\Arr;
 use PHPUnit\Framework\Assert;
 use Snicco\Testing\TestResponse;
 use Snicco\Http\ResponseEmitter;
-use Tests\CustomizeConfigProvider;
 use Snicco\Application\Application;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Snicco\View\Contracts\ViewInterface;
@@ -30,6 +29,9 @@ class FrameworkTestCase extends BaseTestCase
             $this->mail_data[] = $wp_mail_input;
             return true;
         }, 10, 2);
+        if ( ! defined('TEST_APP_BASE_PATH')) {
+            define('TEST_APP_BASE_PATH', __DIR__.'/TestApp');
+        }
     }
     
     protected function tearDown() :void

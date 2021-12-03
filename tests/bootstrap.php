@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Tests\stubs\HeaderStack;
 use Snicco\Http\ResponseEmitter;
 use Snicco\Http\ResponsePreparation;
 use AdrianSuter\Autoload\Override\Override;
+use Tests\Core\fixtures\TestDoubles\HeaderStack;
 
 error_reporting(E_ALL);
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);

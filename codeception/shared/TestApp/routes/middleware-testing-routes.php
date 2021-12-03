@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Snicco\Routing\Router;
 use Tests\Codeception\shared\TestApp\TestApp;
-use Tests\fixtures\Middleware\GlobalMiddleware;
+use Tests\Core\fixtures\Middleware\GlobalMiddleware;
 
 TestApp::route()->group(function (Router $router) {
     $router->get('foo', function () {

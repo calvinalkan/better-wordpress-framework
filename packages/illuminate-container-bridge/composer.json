@@ -15,7 +15,10 @@
   },
   "autoload": {
     "psr-4": {
-      "Snicco\\Illuminate\\" : "src"
+      "Snicco\\Illuminate\\": "src"
     }
+  },
+  "autoload-dev": {
+    "Tests\\IllumianteContainerBridge\\": "tests"
   }
 }

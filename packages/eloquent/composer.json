@@ -21,5 +21,10 @@
     "psr-4": {
       "Snicco\\Database\\": "src"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Database\\": "tests"
+    }
   }
 }

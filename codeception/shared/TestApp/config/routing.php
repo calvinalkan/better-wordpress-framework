@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Tests\fixtures\Conditions\TrueCondition;
+use Tests\Core\fixtures\Conditions\TrueCondition;
 
 return [
     
-    //'definitions' => ROUTES_DIR,
+    'definitions' => dirname(__DIR__).'/routes',
     
     'api' => [
         'endpoints' => [
@@ -15,12 +15,6 @@ return [
     ],
     
     'trailing_slash' => false,
-    
-    'controllers' => [
-        'Tests\fixtures\Controllers\Web',
-        'Tests\fixtures\Controllers\Admin',
-        'Tests\fixtures\Controllers\Ajax',
-    ],
     
     'conditions' => [
         'true' => TrueCondition::class,

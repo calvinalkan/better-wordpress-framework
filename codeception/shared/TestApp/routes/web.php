@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 use Snicco\Http\ResponseFactory;
-use Tests\fixtures\Conditions\IsPost;
-use Tests\fixtures\Middleware\WebMiddleware;
-use Tests\fixtures\Middleware\FooMiddleware;
+use Tests\Core\fixtures\Conditions\IsPost;
 use Tests\Codeception\shared\TestApp\TestApp;
-use Tests\fixtures\Middleware\FooBarMiddleware;
+use Tests\Core\fixtures\Middleware\FooMiddleware;
+use Tests\Core\fixtures\Middleware\WebMiddleware;
+use Tests\Core\fixtures\Middleware\FooBarMiddleware;
 
 $pass_condition = $GLOBALS['test']['pass_fallback_route_condition'] ?? false;
 

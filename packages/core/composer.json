@@ -36,5 +36,10 @@
     "files": [
       "src/Support/functions.php"
     ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Core\\": "tests"
+    }
   }
 }

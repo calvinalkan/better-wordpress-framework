@@ -11,3 +11,4 @@ extensions:
     - "Codeception\\Command\\GenerateWPUnit"
 
 error_level: E_ALL
+

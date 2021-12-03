@@ -45,7 +45,7 @@ class ViewEngineTest extends WPTestCase
     {
         parent::setUp();
         
-        $this->view_dir = VIEW_TEST_DIR.DS.'fixtures'.DS.'views';
+        $this->view_dir = SHARED_FIXTURES_DIR.DS.'views';
         
         $this->global_view_context = new GlobalViewContext();
         $this->composers = new ViewComposerCollection(

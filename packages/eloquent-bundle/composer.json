@@ -21,5 +21,10 @@
     "psr-4": {
       "Snicco\\EloquentBundle\\": "src"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\EloquentBundle\\": "tests"
+    }
   }
 }

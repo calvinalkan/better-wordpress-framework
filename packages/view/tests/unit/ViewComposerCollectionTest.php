@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\View\unit;
 
-use Tests\UnitTest;
-use Tests\stubs\TestView;
 use InvalidArgumentException;
 use Snicco\View\GlobalViewContext;
+use Tests\Codeception\shared\UnitTest;
 use Snicco\View\ViewComposerCollection;
 use Snicco\View\Contracts\ViewComposer;
 use Snicco\View\Contracts\ViewInterface;
+use Tests\Core\fixtures\TestDoubles\TestView;
 use Snicco\ViewBundle\DependencyInjectionViewComposerFactory;
 use Snicco\View\Implementations\NewableInstanceViewComposerFactory;
 
