@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\integration\session;
 
-use Tests\FrameworkTestCase;
 use Snicco\Session\SessionServiceProvider;
 use Snicco\Session\Middleware\VerifyCsrfToken;
+use Tests\Codeception\shared\FrameworkTestCase;
 
 class VerifyCsrfTokenTest extends FrameworkTestCase
 {

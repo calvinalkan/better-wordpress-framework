@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\integration\core\Routing;
 
 use WP;
-use Tests\FrameworkTestCase;
+use Tests\Codeception\shared\FrameworkTestCase;
 
 class FilterWpQueryTest extends FrameworkTestCase
 {

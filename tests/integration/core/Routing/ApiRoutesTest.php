@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Tests\integration\core\Routing;
 
 use Snicco\Http\Delegate;
-use Tests\FrameworkTestCase;
 use Snicco\Http\Psr7\Request;
 use Snicco\Contracts\Middleware;
 use Snicco\Http\ResponseFactory;
 use Psr\Http\Message\ResponseInterface;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\EventDispatcher\Events\ResponseSent;
 
 class ApiRoutesTest extends FrameworkTestCase

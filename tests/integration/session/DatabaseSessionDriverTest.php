@@ -7,9 +7,9 @@ namespace Tests\integration\session;
 use wpdb;
 use Mockery;
 use Snicco\Support\WP;
-use Tests\FrameworkTestCase;
 use Tests\stubs\TestRequest;
 use Snicco\Testing\Concerns\TravelsTime;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\Session\Drivers\DatabaseSessionDriver;
 
 /** @todo test for getting all session for a user */

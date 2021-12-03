@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\integration\core\Http;
 
-use Tests\stubs\TestApp;
 use Snicco\Middleware\Www;
-use Tests\FrameworkTestCase;
 use Snicco\Routing\Pipeline;
 use Snicco\Middleware\Secure;
 use Snicco\Middleware\TrailingSlash;
 use Snicco\Middleware\MiddlewareStack;
 use Snicco\Middleware\Core\RouteRunner;
+use Tests\Codeception\shared\TestApp\TestApp;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\Middleware\Core\OpenRedirectProtection;
 use Snicco\Middleware\Core\OutputBufferMiddleware;
 use Snicco\Middleware\Core\EvaluateResponseMiddleware;

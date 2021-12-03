@@ -10,8 +10,8 @@ use Tests\RoutingTestCase;
 use Snicco\Http\Psr7\Request;
 use Snicco\Contracts\Middleware;
 use Psr\Http\Message\ResponseInterface;
-use Tests\fixtures\TestDependencies\Foo;
-use Tests\fixtures\TestDependencies\Bar;
+use Tests\Codeception\shared\TestDependencies\Foo;
+use Tests\Codeception\shared\TestDependencies\Bar;
 use Tests\fixtures\Middleware\MiddlewareWithDependencies;
 use Tests\fixtures\Controllers\Admin\AdminControllerWithMiddleware;
 

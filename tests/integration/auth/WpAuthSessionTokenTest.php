@@ -7,7 +7,7 @@ namespace Tests\integration\auth;
 use WP_User;
 use WP_Session_Tokens;
 use Tests\AuthTestCase;
-use Tests\stubs\TestApp;
+use Tests\Codeception\shared\TestApp\TestApp;
 use Snicco\Session\Contracts\SessionManagerInterface;
 
 class WpAuthSessionTokenTest extends AuthTestCase

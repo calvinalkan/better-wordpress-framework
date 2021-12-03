@@ -19,7 +19,9 @@ class ViewServiceProvider extends ServiceProvider
     public function register() :void
     {
         $ds = DIRECTORY_SEPARATOR;
-        $this->extendViews($this->config->get('app.package_root').$ds.'resources'.$ds.'views');
+        $this->extendViews(
+            $this->config->get('app.package_root').$ds.'resources'.$ds.'views'.$ds.'framework'
+        );
         
         $this->bindGlobalContext();
         

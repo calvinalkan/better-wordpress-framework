@@ -6,9 +6,9 @@ namespace Tests\integration\auth;
 
 use WP_User;
 use Tests\AuthTestCase;
-use Tests\stubs\TestApp;
 use Snicco\Session\Session;
 use Snicco\Session\Contracts\SessionDriver;
+use Tests\Codeception\shared\TestApp\TestApp;
 use Snicco\Session\Drivers\ArraySessionDriver;
 use Snicco\Session\Contracts\SessionManagerInterface;
 

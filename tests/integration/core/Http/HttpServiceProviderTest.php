@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Tests\integration\core\Http;
 
 use ReflectionClass;
-use Tests\stubs\TestApp;
 use Snicco\Http\HttpKernel;
-use Tests\FrameworkTestCase;
 use Snicco\Http\MethodField;
 use RKA\Middleware\IpAddress;
 use Snicco\Http\ResponseFactory;
@@ -15,6 +13,8 @@ use Snicco\Contracts\Redirector;
 use Snicco\Http\StatelessRedirector;
 use Snicco\Http\ResponsePostProcessor;
 use Psr\Http\Server\MiddlewareInterface;
+use Tests\Codeception\shared\TestApp\TestApp;
+use Tests\Codeception\shared\FrameworkTestCase;
 
 class HttpServiceProviderTest extends FrameworkTestCase
 {

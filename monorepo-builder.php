@@ -16,5 +16,10 @@ return static function (ContainerConfigurator $containerConfigurator) :void {
             'mockery/mockery' => '^1.4.2',
             'symplify/monorepo-builder' => '^9.4',
         ],
+        ComposerJsonSection::AUTOLOAD_DEV => [
+            'psr-4' => [
+                "Tests\\Codeception\\" => 'codeception',
+            ],
+        ],
     ]);
 };

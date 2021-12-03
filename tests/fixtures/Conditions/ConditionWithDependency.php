@@ -6,7 +6,7 @@ namespace Tests\fixtures\Conditions;
 
 use Snicco\Http\Psr7\Request;
 use Snicco\Contracts\Condition;
-use Tests\fixtures\TestDependencies\Foo;
+use Tests\Codeception\shared\TestDependencies\Foo;
 
 class ConditionWithDependency implements Condition
 {

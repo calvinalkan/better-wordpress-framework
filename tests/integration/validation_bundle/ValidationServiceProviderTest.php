@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\integration\validation_bundle;
 
-use Tests\stubs\TestApp;
-use Tests\FrameworkTestCase;
 use Snicco\Validation\Validator;
 use Snicco\Session\SessionServiceProvider;
+use Tests\Codeception\shared\TestApp\TestApp;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\Validation\ValidationServiceProvider;
 use Snicco\Validation\Middleware\ShareValidatorWithRequest;
 

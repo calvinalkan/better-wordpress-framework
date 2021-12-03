@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\integration\auth\Controllers;
 
 use Tests\AuthTestCase;
-use Tests\stubs\TestApp;
+use Tests\Codeception\shared\TestApp\TestApp;
 
 use function get_user_by;
 use function wp_check_password;

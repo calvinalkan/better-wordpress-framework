@@ -6,3 +6,6 @@ paths:
 
 settings:
   colors: true
+
+reporters:
+  report: "PhpStorm_Codeception_ReportPrinter"

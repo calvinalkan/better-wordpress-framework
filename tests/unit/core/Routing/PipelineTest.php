@@ -299,7 +299,7 @@ class MiddlewareDependency implements MiddlewareInterface
      */
     private $bar;
     
-    public function __construct(\Tests\fixtures\TestDependencies\Bar $bar)
+    public function __construct(\Tests\Codeception\shared\TestDependencies\Bar $bar)
     {
         $this->bar = $bar;
     }

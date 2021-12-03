@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Tests\integration\core\Application;
 
 use Snicco\Support\WP;
-use Tests\stubs\TestApp;
 use Snicco\Routing\Router;
-use Tests\FrameworkTestCase;
 use Tests\stubs\TestRequest;
 use Snicco\Http\Psr7\Request;
 use Snicco\Http\ResponseFactory;
@@ -16,6 +14,8 @@ use Snicco\Application\Application;
 use Snicco\Http\StatelessRedirector;
 use Snicco\View\Contracts\ViewInterface;
 use Snicco\Http\Responses\RedirectResponse;
+use Tests\Codeception\shared\TestApp\TestApp;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\ExceptionHandling\Exceptions\ConfigurationException;
 
 use const DS;

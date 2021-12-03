@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\integration\core\Http;
 
-use Tests\FrameworkTestCase;
+use Tests\Codeception\shared\FrameworkTestCase;
 
 class RequestTest extends FrameworkTestCase
 {

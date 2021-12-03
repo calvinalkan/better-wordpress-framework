@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\integration\session;
 
-use Tests\stubs\TestApp;
 use Snicco\Session\Session;
-use Tests\FrameworkTestCase;
 use Snicco\Session\CsrfField;
 use Snicco\Http\ResponseFactory;
 use Snicco\Contracts\Redirector;
@@ -17,6 +15,8 @@ use Snicco\Session\EncryptedSession;
 use Snicco\Session\StatefulRedirector;
 use Snicco\Session\SessionServiceProvider;
 use Snicco\Session\Contracts\SessionDriver;
+use Tests\Codeception\shared\TestApp\TestApp;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\Session\Drivers\DatabaseSessionDriver;
 use Snicco\Session\Middleware\StartSessionMiddleware;
 use Snicco\Session\Contracts\SessionManagerInterface;

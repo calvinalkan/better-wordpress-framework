@@ -18,5 +18,10 @@
     "psr-4": {
       "Snicco\\MailBundle\\": "src"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\BetterWPMailBundle\\": "tests"
+    }
   }
 }

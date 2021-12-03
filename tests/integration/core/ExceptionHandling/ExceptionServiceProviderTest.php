@@ -6,13 +6,13 @@ namespace Tests\integration\core\ExceptionHandling;
 
 use Whoops\Run;
 use ReflectionClass;
-use Tests\stubs\TestApp;
 use Whoops\RunInterface;
-use Tests\FrameworkTestCase;
 use Snicco\Routing\Pipeline;
 use Whoops\Handler\HandlerInterface;
 use Whoops\Handler\PrettyPageHandler;
 use Snicco\Contracts\ExceptionHandler;
+use Tests\Codeception\shared\TestApp\TestApp;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\ExceptionHandling\NullExceptionHandler;
 use Snicco\ExceptionHandling\ProductionExceptionHandler;
 

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Tests\integration\auth\Controllers;
 
 use Tests\AuthTestCase;
-use Tests\stubs\TestApp;
 use Snicco\Auth\Fail2Ban\Syslogger;
 use Snicco\Mail\Testing\TestableEmail;
 use Snicco\Auth\Mail\ResetPasswordMail;
 use Snicco\Auth\Fail2Ban\TestSysLogger;
+use Tests\Codeception\shared\TestApp\TestApp;
 use Snicco\Auth\Events\FailedPasswordResetLinkRequest;
 
 class ForgotPasswordControllerTest extends AuthTestCase

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\integration\core\Factories;
 
-use Tests\stubs\TestApp;
-use Tests\FrameworkTestCase;
 use Snicco\Routing\ControllerAction;
 use Snicco\Factories\RouteActionFactory;
 use Snicco\Factories\RouteConditionFactory;
+use Tests\Codeception\shared\TestApp\TestApp;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Tests\View\fixtures\ViewComposers\FooComposer;
 use Snicco\ViewBundle\DependencyInjectionViewComposerFactory;
 

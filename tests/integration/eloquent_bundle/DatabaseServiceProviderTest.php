@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\integration\eloquent_bundle;
 
-use Tests\FrameworkTestCase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Container\Container;
 use Snicco\Database\MysqliConnection;
 use Illuminate\Database\Eloquent\Model;
 use Snicco\Database\WPConnectionResolver;
 use Illuminate\Database\ConnectionInterface;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\EventDispatcher\Contracts\Dispatcher;
 use Snicco\EloquentBundle\DatabaseServiceProvider;
 use Illuminate\Database\ConnectionResolverInterface;

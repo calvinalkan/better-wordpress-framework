@@ -6,8 +6,8 @@ namespace Tests\unit\core\Routing;
 
 use Tests\RoutingTestCase;
 use Snicco\Http\Psr7\Request;
-use Tests\fixtures\TestDependencies\Bar;
-use Tests\fixtures\TestDependencies\Foo;
+use Tests\Codeception\shared\TestDependencies\Bar;
+use Tests\Codeception\shared\TestDependencies\Foo;
 use Tests\fixtures\Controllers\Web\TeamsController;
 use Tests\fixtures\Controllers\Web\ControllerWithDependencies;
 

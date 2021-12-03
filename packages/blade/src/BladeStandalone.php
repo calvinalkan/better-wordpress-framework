@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Snicco\Blade;
 
 use RuntimeException;
-use Snicco\Support\WP;
 use Illuminate\Support\Fluent;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Container\Container;
@@ -17,6 +16,9 @@ use Snicco\View\ViewComposerCollection;
 use Illuminate\View\ViewServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Container\Container as IlluminateContainer;
+
+use function is_user_logged_in;
+use function wp_get_current_user;
 
 /**
  * @api
@@ -87,16 +89,23 @@ final class BladeStandalone
     // Register custom blade directives
     private function bindWordPressDirectives() :void
     {
-        Blade::if('auth', function () { return WP::isUserLoggedIn(); });
+        Blade::if('auth', function () { return is_user_logged_in(); });
         
-        Blade::if('guest', function () { return ! WP::isUserLoggedIn(); });
+        Blade::if('guest', function () { return ! is_user_logged_in(); });
         
         Blade::if('role', function ($expression) {
             if ($expression === 'admin') {
                 $expression = 'administrator';
             }
-            
-            return WP::userIs($expression);
+            $user = wp_get_current_user();
+            if ( ! empty($user->roles) && is_array($user->roles)
+                 && in_array(
+                     $expression,
+                     $user->roles
+                 )) {
+                return true;
+            }
+            return false;
         });
         
         Blade::directive('service', function () {

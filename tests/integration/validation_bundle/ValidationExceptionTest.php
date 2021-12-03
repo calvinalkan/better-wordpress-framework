@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\integration\validation_bundle;
 
-use Tests\FrameworkTestCase;
 use Snicco\Contracts\ExceptionHandler;
 use Snicco\Session\SessionServiceProvider;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\Validation\ValidationServiceProvider;
 use Snicco\Validation\Exceptions\ValidationException;
 use Snicco\ExceptionHandling\ProductionExceptionHandler;

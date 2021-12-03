@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\integration\core\Routing;
 
-use Tests\stubs\TestApp;
 use Snicco\Routing\Router;
-use Tests\FrameworkTestCase;
 use Snicco\Routing\UrlGenerator;
 use Snicco\Contracts\RouteRegistrar;
 use Snicco\Contracts\RouteUrlMatcher;
 use Snicco\Contracts\RouteUrlGenerator;
 use Snicco\Factories\RouteConditionFactory;
 use Snicco\Routing\CachedRouteFileRegistrar;
+use Tests\Codeception\shared\TestApp\TestApp;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\Routing\FastRoute\FastRouteUrlMatcher;
 use Snicco\Routing\FastRoute\FastRouteUrlGenerator;
 

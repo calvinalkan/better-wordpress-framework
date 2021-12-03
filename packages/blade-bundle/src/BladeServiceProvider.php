@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Snicco\BladeBundle;
 
 use Snicco\Blade\BladeStandalone;
-use Snicco\Application\Application;
 use Snicco\Contracts\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Snicco\View\Contracts\ViewFactory;
@@ -19,8 +18,6 @@ class BladeServiceProvider extends ServiceProvider
     {
         $blade = $this->registerBlade();
         
-        $this->createFrameworkViewDirectives();
-        
         $this->container->singleton(ViewFactory::class, function () use ($blade) {
             return $blade->getBladeViewFactory();
         });
@@ -28,7 +25,7 @@ class BladeServiceProvider extends ServiceProvider
     
     function bootstrap() :void
     {
-        //
+        $this->createFrameworkViewDirectives();
     }
     
     private function registerBlade() :BladeStandalone
@@ -48,23 +45,17 @@ class BladeServiceProvider extends ServiceProvider
     
     private function createFrameworkViewDirectives() :void
     {
-        Blade::directive('csrf', function () {
-            /** @var Application $app */
-            $app = $this->container->make(ApplicationTrait::class);
-            
-            $php = "<?php echo {$app}::csrfField() ?>";
-            
-            return $php;
-        });
+        if ($this->sessionEnabled()) {
+            Blade::directive('csrf', function () {
+                $app = $this->container->make(ApplicationTrait::class);
+                return "<?php echo {$app}::csrfField() ?>";
+            });
+        }
+        
         Blade::directive('method', function ($method) {
             $method = str_replace("'", '', $method);
-            
-            /** @var Application $app */
             $app = $this->container->make(ApplicationTrait::class);
-            
-            $php = "<?php echo {$app}::methodField('$method') ?>";
-            
-            return $php;
+            return "<?php echo {$app}::methodField('$method') ?>";
         });
     }
     

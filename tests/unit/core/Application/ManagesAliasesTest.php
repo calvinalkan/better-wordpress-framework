@@ -9,7 +9,7 @@ use Tests\UnitTest;
 use Tests\concerns\CreateContainer;
 use Snicco\Shared\ContainerAdapter;
 use Snicco\Application\ManagesAliases;
-use Tests\fixtures\TestDependencies\Foo;
+use Tests\Codeception\shared\TestDependencies\Foo;
 
 class ManagesAliasesTest extends UnitTest
 {

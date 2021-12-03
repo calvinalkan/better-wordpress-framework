@@ -6,9 +6,9 @@ namespace Tests\integration\core\Routing;
 
 use Snicco\Support\WP;
 use Snicco\Support\Arr;
-use Tests\stubs\TestApp;
-use Tests\FrameworkTestCase;
 use Snicco\Contracts\ServiceProvider;
+use Tests\Codeception\shared\TestApp\TestApp;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\EventDispatcher\Events\IncomingAjaxRequest;
 use Snicco\EventDispatcher\Events\IncomingAdminRequest;
 

@@ -6,7 +6,6 @@ namespace Tests\integration\auth\Controllers;
 
 use WP_User;
 use Tests\AuthTestCase;
-use Tests\stubs\TestApp;
 use Snicco\Http\Psr7\Request;
 use Snicco\Http\ResponseFactory;
 use Snicco\Contracts\Responsable;
@@ -16,6 +15,7 @@ use Snicco\Auth\Traits\ResolvesUser;
 use Snicco\Auth\Contracts\DeletesUsers;
 use Snicco\Auth\Contracts\CreatesNewUser;
 use Snicco\Auth\Contracts\CreateAccountView;
+use Tests\Codeception\shared\TestApp\TestApp;
 use Snicco\Auth\Contracts\AbstractRegistrationResponse;
 
 class AccountControllerTest extends AuthTestCase

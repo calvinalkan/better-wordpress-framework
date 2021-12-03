@@ -7,7 +7,7 @@ namespace Snicco\Session;
 use RuntimeException;
 use Snicco\Session\Middleware\VerifyCsrfToken;
 
-class CsrfField
+final class CsrfField
 {
 	
 	private Session $session;

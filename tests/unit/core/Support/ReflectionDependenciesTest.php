@@ -7,9 +7,9 @@ namespace Tests\unit\core\Support;
 use Tests\UnitTest;
 use Snicco\Shared\ContainerAdapter;
 use Tests\concerns\CreateContainer;
-use Tests\fixtures\TestDependencies\Bar;
-use Tests\fixtures\TestDependencies\Foo;
 use Snicco\Support\ReflectionDependencies;
+use Tests\Codeception\shared\TestDependencies\Foo;
+use Tests\Codeception\shared\TestDependencies\Bar;
 
 class ReflectionDependenciesTest extends UnitTest
 {

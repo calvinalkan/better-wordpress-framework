@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\integration\session;
 
-use Tests\FrameworkTestCase;
 use Snicco\Session\SessionManager;
 use Snicco\Session\SessionServiceProvider;
+use Tests\Codeception\shared\FrameworkTestCase;
 
 class SessionSavingTest extends FrameworkTestCase
 {

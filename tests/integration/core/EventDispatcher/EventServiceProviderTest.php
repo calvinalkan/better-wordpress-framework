@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\integration\core\EventDispatcher;
 
-use Tests\FrameworkTestCase;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\EventDispatcher\Contracts\Dispatcher;
 use Snicco\EventDispatcher\Contracts\ListenerFactory;
 use Snicco\EventDispatcher\Dispatcher\FakeDispatcher;

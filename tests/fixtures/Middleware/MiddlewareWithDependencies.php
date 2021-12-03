@@ -8,8 +8,8 @@ use Snicco\Http\Delegate;
 use Snicco\Http\Psr7\Request;
 use Snicco\Contracts\Middleware;
 use Psr\Http\Message\ResponseInterface;
-use Tests\fixtures\TestDependencies\Bar;
-use Tests\fixtures\TestDependencies\Foo;
+use Tests\Codeception\shared\TestDependencies\Bar;
+use Tests\Codeception\shared\TestDependencies\Foo;
 
 class MiddlewareWithDependencies extends Middleware
 {

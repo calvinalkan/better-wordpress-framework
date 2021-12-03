@@ -7,8 +7,8 @@ namespace Tests\integration\core\Http;
 use wpdb;
 use Snicco\Support\Carbon;
 use Tests\stubs\TestRequest;
-use Tests\FrameworkTestCase;
 use Snicco\Http\DatabaseMagicLink;
+use Tests\Codeception\shared\FrameworkTestCase;
 
 class DatabaseMagicLinkTest extends FrameworkTestCase
 {

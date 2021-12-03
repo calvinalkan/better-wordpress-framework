@@ -13,10 +13,7 @@ use Snicco\View\Contracts\ViewInterface;
 use Snicco\View\Exceptions\ViewNotFoundException;
 use Snicco\View\Exceptions\ViewRenderingException;
 
-/**
- * @internal
- */
-class PHPViewFactory implements ViewFactory
+final class PHPViewFactory implements ViewFactory
 {
     
     /**
@@ -59,6 +56,9 @@ class PHPViewFactory implements ViewFactory
         );
     }
     
+    /**
+     * @interal
+     */
     public function renderPhpView(PHPView $view) :string
     {
         $ob_level = ob_get_level();

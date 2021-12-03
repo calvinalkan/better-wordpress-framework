@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Tests\integration\session;
 
 use Snicco\Http\Cookies;
-use Tests\FrameworkTestCase;
 use Snicco\Http\ResponseEmitter;
 use Snicco\Session\SessionManager;
 use Snicco\Traits\InteractsWithTime;
 use Snicco\Session\SessionServiceProvider;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\Session\Events\SessionWasRegenerated;
 
 class SessionManagerTest extends FrameworkTestCase

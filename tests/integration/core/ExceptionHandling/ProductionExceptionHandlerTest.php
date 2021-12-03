@@ -6,8 +6,8 @@ namespace Tests\integration\core\ExceptionHandling;
 
 use Psr\Log\LogLevel;
 use Tests\stubs\TestLogger;
-use Tests\FrameworkTestCase;
 use Psr\Log\LoggerInterface;
+use Tests\Codeception\shared\FrameworkTestCase;
 
 class ProductionExceptionHandlerTest extends FrameworkTestCase
 {

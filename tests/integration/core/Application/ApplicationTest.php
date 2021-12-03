@@ -2,7 +2,7 @@
 
 namespace Tests\integration\core\Application;
 
-use Tests\FrameworkTestCase;
+use Tests\Codeception\shared\FrameworkTestCase;
 
 class ApplicationTest extends FrameworkTestCase
 {

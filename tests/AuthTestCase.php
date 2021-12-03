@@ -12,6 +12,7 @@ use Snicco\Auth\AuthSessionManager;
 use Snicco\Auth\AuthServiceProvider;
 use Snicco\Session\SessionServiceProvider;
 use Snicco\Session\Contracts\SessionDriver;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\Validation\ValidationServiceProvider;
 use Snicco\Session\Contracts\SessionManagerInterface;
 use Snicco\DefuseEncryption\DefuseEncryptionServiceProvider;

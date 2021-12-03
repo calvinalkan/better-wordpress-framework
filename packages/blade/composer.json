@@ -18,5 +18,10 @@
     "psr-4": {
       "Snicco\\Blade\\": "src"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Blade\\": "tests"
+    }
   }
 }

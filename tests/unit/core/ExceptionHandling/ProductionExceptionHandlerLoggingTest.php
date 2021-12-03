@@ -16,8 +16,8 @@ use Snicco\Http\Psr7\Request;
 use Snicco\Http\ResponseFactory;
 use Snicco\Shared\ContainerAdapter;
 use Tests\concerns\CreateContainer;
-use Tests\fixtures\TestDependencies\Foo;
 use Tests\concerns\CreateDefaultWpApiMocks;
+use Tests\Codeception\shared\TestDependencies\Foo;
 use Snicco\ExceptionHandling\ProductionExceptionHandler;
 
 class ProductionExceptionHandlerLoggingTest extends UnitTest

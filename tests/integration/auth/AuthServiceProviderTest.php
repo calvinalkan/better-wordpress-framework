@@ -6,7 +6,6 @@ namespace Tests\integration\auth;
 
 use WP_Session_Tokens;
 use Tests\AuthTestCase;
-use Tests\stubs\TestApp;
 use Snicco\Middleware\Secure;
 use Snicco\Session\SessionManager;
 use Snicco\Auth\Fail2Ban\Fail2Ban;
@@ -21,6 +20,7 @@ use Snicco\Auth\Contracts\AuthConfirmation;
 use Snicco\Http\Responses\RedirectResponse;
 use Snicco\Auth\Contracts\AbstractLoginView;
 use Snicco\Auth\Responses\PasswordLoginView;
+use Tests\Codeception\shared\TestApp\TestApp;
 use Snicco\Auth\Responses\MagicLinkLoginView;
 use Snicco\Auth\Middleware\AuthenticateSession;
 use Snicco\EventDispatcher\Events\ResponseSent;

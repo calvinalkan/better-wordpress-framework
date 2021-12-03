@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Tests\stubs\TestApp;
+use Tests\Codeception\shared\TestApp\TestApp;
 
 ?>
 

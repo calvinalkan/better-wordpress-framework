@@ -6,7 +6,7 @@ namespace Tests\View\fixtures\ViewComposers;
 
 use Snicco\View\Contracts\ViewComposer;
 use Snicco\View\Contracts\ViewInterface;
-use Tests\fixtures\TestDependencies\Bar;
+use Tests\Codeception\shared\TestDependencies\Bar;
 
 class FooComposer implements ViewComposer
 {

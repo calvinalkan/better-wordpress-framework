@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\integration\core\Routing;
 
-use Tests\FrameworkTestCase;
 use Snicco\EventDispatcher\Event;
 use Tests\fixtures\Middleware\WebMiddleware;
+use Tests\Codeception\shared\FrameworkTestCase;
 use Snicco\EventDispatcher\Events\ResponseSent;
 
 class WordpressConditionRoutes extends FrameworkTestCase

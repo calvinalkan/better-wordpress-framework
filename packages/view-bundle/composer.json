@@ -18,5 +18,10 @@
     "psr-4": {
       "Snicco\\ViewBundle\\": "src"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\ViewBundle\\": "tests"
+    }
   }
 }

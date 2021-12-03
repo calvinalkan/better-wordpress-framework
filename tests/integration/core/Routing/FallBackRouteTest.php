@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\integration\core\Routing;
 
-use Tests\FrameworkTestCase;
+use Tests\Codeception\shared\FrameworkTestCase;
 
 class FallBackRouteTest extends FrameworkTestCase
 {

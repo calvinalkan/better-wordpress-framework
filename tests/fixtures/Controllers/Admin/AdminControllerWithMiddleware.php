@@ -6,7 +6,7 @@ namespace Tests\fixtures\Controllers\Admin;
 
 use Snicco\Http\Controller;
 use Snicco\Http\Psr7\Request;
-use Tests\fixtures\TestDependencies\Baz;
+use Tests\Codeception\shared\TestDependencies\Baz;
 use Tests\fixtures\Middleware\MiddlewareWithDependencies;
 
 class AdminControllerWithMiddleware extends Controller

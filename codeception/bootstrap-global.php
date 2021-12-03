@@ -6,7 +6,18 @@ if ( ! defined('DS')) {
     define('DS', DIRECTORY_SEPARATOR);
 }
 
-//$root_dir = getenv('WP_ROOT_FOLDER').DIRECTORY_SEPARATOR.'framework';
+$root_dir = getenv('WP_ROOT_FOLDER').DIRECTORY_SEPARATOR.'framework';
+$repository_root_dir = getenv('REPOSITORY_ROOT_DIR');
+
+if ( ! defined('CODECEPTION_DIR')) {
+    define('CODECEPTION_DIR', $repository_root_dir.DS.'codeception');
+}
+
+if ( ! defined('SHARED_FIXTURES_DIR')) {
+    define('SHARED_FIXTURES_DIR', CODECEPTION_DIR.DS.'shared-fixtures');
+}
+
+
 //$tests_dir = $root_dir.DIRECTORY_SEPARATOR.'tests';
 //
 

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\fixtures\Controllers\Web;
 
 use Snicco\Http\Psr7\Request;
-use Tests\fixtures\TestDependencies\Bar;
-use Tests\fixtures\TestDependencies\Foo;
+use Tests\Codeception\shared\TestDependencies\Bar;
+use Tests\Codeception\shared\TestDependencies\Foo;
 
 class TeamsController
 {
