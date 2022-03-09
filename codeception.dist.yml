@@ -4,6 +4,7 @@ paths:
   data: tests/codecept/_data
   support: tests/codecept/_support
 actor_suffix: Tester
+bootstrap: bootstrap.php
 extensions:
   enabled:
     - Codeception\Extension\RunFailed

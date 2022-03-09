@@ -417,13 +417,13 @@ abstract class TestCase extends WPTestCase
             return;
         }
         
-        $url = $_ENV['APP_URL'] ?? 'https://localhost.test';
+        $url = $_ENV['SITE_URL'] ?? 'https://localhost.test';
         $this->config->set('app.url', $url);
         
         $request = new Request(
             $this->request_factory->createServerRequest(
                 'GET',
-                $this->createUri($_SERVER['FLUSHABLE_SITE_WP_URL'] ?? 'https://localhost.test'),
+                $this->createUri($_SERVER['SITE_URL'] ?? 'https://localhost.test'),
                 $this->default_server_variables
             )
         );

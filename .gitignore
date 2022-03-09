@@ -6,3 +6,5 @@ phpunit.xml
 /tests/integration/Blade/cache/*
 !/tests/integration/Blade/cache/.gitkeep
 composer.lock
+tests/codecept/_output
+!tests/codecept/_output/.gitkeep
